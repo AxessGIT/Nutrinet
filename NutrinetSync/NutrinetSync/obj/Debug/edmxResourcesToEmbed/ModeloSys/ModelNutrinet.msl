@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="nutrinetModelStoreContainer" CdmEntityContainer="nutrinetEntities">
+    <EntitySetMapping Name="paciente">
+      <EntityTypeMapping TypeName="nutrinetModel.paciente">
+        <MappingFragment StoreEntitySet="paciente">
+          <ScalarProperty Name="pacienteid" ColumnName="pacienteid" />
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="apellidop" ColumnName="apellidop" />
+          <ScalarProperty Name="apellidom" ColumnName="apellidom" />
+          <ScalarProperty Name="fechanac" ColumnName="fechanac" />
+          <ScalarProperty Name="sexo" ColumnName="sexo" />
+          <ScalarProperty Name="estadocivil" ColumnName="estadocivil" />
+          <ScalarProperty Name="telefonos" ColumnName="telefonos" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
+          <ScalarProperty Name="referente" ColumnName="referente" />
+          <ScalarProperty Name="calle" ColumnName="calle" />
+          <ScalarProperty Name="numext" ColumnName="numext" />
+          <ScalarProperty Name="numint" ColumnName="numint" />
+          <ScalarProperty Name="colonia" ColumnName="colonia" />
+          <ScalarProperty Name="localidad" ColumnName="localidad" />
+          <ScalarProperty Name="municipio" ColumnName="municipio" />
+          <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+          <ScalarProperty Name="ciudadorigen" ColumnName="ciudadorigen" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="pais" ColumnName="pais" />
+          <ScalarProperty Name="nombrepadre" ColumnName="nombrepadre" />
+          <ScalarProperty Name="nombremadre" ColumnName="nombremadre" />
+          <ScalarProperty Name="ultimaconsulta" ColumnName="ultimaconsulta" />
+          <ScalarProperty Name="peso" ColumnName="peso" />
+          <ScalarProperty Name="talla" ColumnName="talla" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
