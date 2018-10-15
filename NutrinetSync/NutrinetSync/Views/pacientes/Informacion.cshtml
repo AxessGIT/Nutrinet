@@ -14,7 +14,6 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    @*@Html.HiddenFor(model => model.pacienteid)*@
     @*Por medio del ViewBag, se revisa si es alta o no*@
     @if (ViewBag.Message == "modificacion")
     {
@@ -336,11 +335,17 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-8">
+        <div class="row">
+            <div class="col-md-4">
                 <input type="submit" value="Guardar" class="btn btn-success" />
+
+                @if (ViewBag.Message == "modificacion")
+                {
+                    <input type="button" value="Historial" class="btn btn-primary" onclick="location.href='@Url.Action("Historia", "pacientes", new { pacienteid = Model.pacienteid })'" />
+                }
             </div>
         </div>
+        
     </div>
 </div>
 }

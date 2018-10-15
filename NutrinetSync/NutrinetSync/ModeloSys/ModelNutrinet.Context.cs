@@ -26,5 +26,6 @@ namespace NutrinetSync.ModeloSys
         }
     
         public virtual DbSet<paciente> paciente { get; set; }
+        public virtual DbSet<historias> historias { get; set; }
     }
 }

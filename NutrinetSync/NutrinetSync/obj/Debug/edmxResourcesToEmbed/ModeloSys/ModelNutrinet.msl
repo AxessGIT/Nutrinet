@@ -32,5 +32,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="historias">
+      <EntityTypeMapping TypeName="nutrinetModel.historias">
+        <MappingFragment StoreEntitySet="historias">
+          <ScalarProperty Name="historia" ColumnName="historia" />
+          <ScalarProperty Name="pacienteid" ColumnName="pacienteid" />
+          <ScalarProperty Name="historiaid" ColumnName="historiaid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

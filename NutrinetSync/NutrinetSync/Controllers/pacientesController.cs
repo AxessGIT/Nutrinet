@@ -35,28 +35,41 @@ namespace NutrinetSync.Controllers
             return View(paciente);
         }
 
-        // GET: pacientes/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+        //GET: pacientes/Historia
+        public ActionResult Historia(long? pacienteid)
+        {
+            if (pacienteid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            historias historia = db.historias.Where(h => h.pacienteid == pacienteid).FirstOrDefault();
+            paciente paciente = db.paciente.Find(pacienteid);
+            if (historia == null)
+            {
+                return HttpNotFound();
+            }
 
-        // POST: pacientes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "pacienteid,nombres,apellidop,apellidom,fechanac,sexo,estadocivil,telefonos,correo,referente,calle,numext,numint,colonia,localidad,municipio,ciudad,ciudadorigen,estado,pais,nombrepadre,nombremadre,ultimaconsulta,peso,talla")] paciente paciente)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.paciente.Add(paciente);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
+            //Obtiene y guarda la informacion del paciente actual en en ViewBag
+            ViewBag.NombreCompleto = paciente.nombres + " " + paciente.apellidop + " " + paciente.apellidom;
+            ViewBag.Edad = Edad(paciente.fechanac);
+            ViewBag.Sexo = paciente.sexo;
 
-        //    return View(paciente);
-        //}
+            return View(historia);
+        }
+
+        //POST: pacientes/Historia/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Historia([Bind(Include = "historiaid,pacienteid,historia")] historias historia)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(historia).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(historia);
+        }
 
         // GET: pacientes/Informacion
         public ActionResult Informacion(long? id)
@@ -77,6 +90,7 @@ namespace NutrinetSync.Controllers
 
             //Se notifica que es modificacion
             ViewBag.Message = "modificacion";
+            ViewBag.id = id;
 
             return View(paciente);
         }
@@ -95,6 +109,13 @@ namespace NutrinetSync.Controllers
                 else
                 {
                     db.paciente.Add(paciente);
+
+                    //Si es alta, se crea tambien el registro de historia
+                    historias historia = new historias();
+                    historia.pacienteid = paciente.pacienteid;
+                    historia.historia = "";
+
+                    db.historias.Add(historia);
                 }
 
                 db.SaveChanges();
@@ -102,37 +123,6 @@ namespace NutrinetSync.Controllers
             }
             return View(paciente);
         }
-
-        // GET: pacientes/Edit/5
-        //public ActionResult Edit(long? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    paciente paciente = db.paciente.Find(id);
-        //    if (paciente == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(paciente);
-        //}
-
-        // POST: pacientes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "pacienteid,nombres,apellidop,apellidom,fechanac,sexo,estadocivil,telefonos,correo,referente,calle,numext,numint,colonia,localidad,municipio,ciudad,ciudadorigen,estado,pais,nombrepadre,nombremadre,ultimaconsulta,peso,talla")] paciente paciente)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(paciente).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(paciente);
-        //}
 
         // GET: pacientes/Delete/5
         public ActionResult Delete(long? id)
@@ -158,6 +148,13 @@ namespace NutrinetSync.Controllers
             db.paciente.Remove(paciente);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public int Edad(DateTime FechaNacimiento)
+        {
+            int edad = DateTime.Today.AddTicks(-FechaNacimiento.Ticks).Year - 1;
+
+            return edad;
         }
 
         protected override void Dispose(bool disposing)

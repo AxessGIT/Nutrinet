@@ -14,6 +14,12 @@ namespace NutrinetSync.ModeloSys
     
     public partial class paciente
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public paciente()
+        {
+            this.historias = new HashSet<historias>();
+        }
+    
         public long pacienteid { get; set; }
         public string nombres { get; set; }
         public string apellidop { get; set; }
@@ -39,5 +45,8 @@ namespace NutrinetSync.ModeloSys
         public System.DateTime ultimaconsulta { get; set; }
         public decimal peso { get; set; }
         public decimal talla { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<historias> historias { get; set; }
     }
 }

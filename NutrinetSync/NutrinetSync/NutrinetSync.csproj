@@ -189,6 +189,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ModeloSys\historias.cs">
+      <DependentUpon>ModelNutrinet.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloSys\ModelNutrinet.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -618,6 +621,7 @@
     <Content Include="Views\pacientes\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\pacientes\Informacion.cshtml" />
+    <Content Include="Views\pacientes\Historia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
