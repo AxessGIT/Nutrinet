@@ -15,7 +15,7 @@ namespace NutrinetSync.ModeloSys
     public partial class historias
     {
         public long historiaid { get; set; }
-        public Nullable<long> pacienteid { get; set; }
+        public long pacienteid { get; set; }
         public string historia { get; set; }
     
         public virtual paciente paciente { get; set; }

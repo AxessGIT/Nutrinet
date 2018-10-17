@@ -60,15 +60,15 @@ namespace NutrinetSync.Controllers
         //POST: pacientes/Historia/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Historia([Bind(Include = "historiaid,pacienteid,historia")] historias historia)
+        public ActionResult Historia([Bind(Include = "historiaid,pacienteid,historia")] historias historialpaciente)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(historia).State = EntityState.Modified;
+                db.Entry(historialpaciente).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Informacion", new { id = historialpaciente.pacienteid });
             }
-            return View(historia);
+            return View(historialpaciente);
         }
 
         // GET: pacientes/Informacion

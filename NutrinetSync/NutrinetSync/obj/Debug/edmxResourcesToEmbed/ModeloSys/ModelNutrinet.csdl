@@ -44,12 +44,12 @@
       <PropertyRef Name="historiaid" />
     </Key>
     <Property Name="historiaid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="pacienteid" Type="Int64" />
-    <Property Name="historia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="pacienteid" Type="Int64" Nullable="false" />
+    <Property Name="historia" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="paciente" Relationship="nutrinetModel.historias_fk" FromRole="historias" ToRole="paciente" />
   </EntityType>
   <Association Name="historias_fk">
-    <End Type="nutrinetModel.paciente" Role="paciente" Multiplicity="0..1" />
+    <End Type="nutrinetModel.paciente" Role="paciente" Multiplicity="1" />
     <End Type="nutrinetModel.historias" Role="historias" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="paciente">
