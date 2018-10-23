@@ -53,6 +53,7 @@ namespace NutrinetSync.Controllers
             ViewBag.NombreCompleto = paciente.nombres + " " + paciente.apellidop + " " + paciente.apellidom;
             ViewBag.Edad = Edad(paciente.fechanac);
             ViewBag.Sexo = paciente.sexo;
+            ViewBag.FechaActual = paciente.ultimaconsulta.ToString("yyyy/MM/dd");
 
             return View(historia);
         }
@@ -60,12 +61,24 @@ namespace NutrinetSync.Controllers
         //POST: pacientes/Historia/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Historia([Bind(Include = "historiaid,pacienteid,historia")] historias historialpaciente)
+        public ActionResult Historia([Bind(Include = "historiaid,pacienteid,historia")] historias historialpaciente, [Bind(Include = "pacienteid,nombres,apellidop,apellidom,fechanac,sexo,estadocivil,telefonos,correo,referente,calle,numext,numint,colonia,localidad,municipio,ciudad,ciudadorigen,estado,pais,nombrepadre,nombremadre,ultimaconsulta,peso,talla")] paciente paciente)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(historialpaciente).State = EntityState.Modified;
                 db.SaveChanges();
+
+                //Consulta al paciente en base a su id
+                paciente pacienteConsulta = db.paciente.Where(p => p.pacienteid == paciente.pacienteid).FirstOrDefault();
+
+                //Asigna los datos modificados
+                pacienteConsulta.peso = paciente.peso;
+                pacienteConsulta.talla = paciente.talla;
+                pacienteConsulta.ultimaconsulta = paciente.ultimaconsulta;
+
+                db.Entry(pacienteConsulta).State = EntityState.Modified;
+                db.SaveChanges();
+
                 return RedirectToAction("Informacion", new { id = historialpaciente.pacienteid });
             }
             return View(historialpaciente);

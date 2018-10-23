@@ -40,6 +40,9 @@ namespace NutrinetSync
                             "~/Scripts/ej/ej.unobtrusive.min.js"));
             bundles.Add(new StyleBundle("~/bundles/ejstyles").Include(
                       "~/ejThemes/flat-saffron/ej.web.all.min.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/funciones").Include(
+                      "~/Scripts/Funciones.js"));
         }
     }
 }

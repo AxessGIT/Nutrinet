@@ -36,7 +36,7 @@
     <Property Name="nombremadre" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="ultimaconsulta" Type="date" Nullable="false" />
     <Property Name="peso" Type="numeric" Precision="6" Scale="2" Nullable="false" />
-    <Property Name="talla" Type="numeric" Precision="3" Scale="1" Nullable="false" />
+    <Property Name="talla" Type="numeric" Precision="4" Scale="2" Nullable="false" />
   </EntityType>
   <Association Name="historias_fk">
     <End Role="paciente" Type="Self.paciente" Multiplicity="1" />

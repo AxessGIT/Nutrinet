@@ -558,6 +558,7 @@
     <Content Include="Scripts\ej\ej.web.all.min.js" />
     <Content Include="Scripts\ej\ej.widget.angular.min.js" />
     <Content Include="Scripts\ej\ej.widget.ko.min.js" />
+    <Content Include="Scripts\Funciones.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
