@@ -8816,6 +8816,9 @@ ejDiagram :function (options) {
 ///To set the margin of the label in bottom direction
 ///<br/>bottom-number	default-0
 ///<br/><br/>
+///Sets the padding for connector label.
+///<br/>padding-any	default-ej.datavisualization.Diagram.Point(0.5, 0.5)
+///<br/><br/>
 ///Sets the value which is used to drag the label within certain bounds.
 ///<br/>dragLimit-any	default-null
 ///<br/><br/>
@@ -9290,6 +9293,9 @@ ejDiagram :function (options) {
 ///Defines how long edges should be, ideally. This will be the resting length for the springs.
 ///<br/>maxIteration-number	default-1000
 ///<br/><br/>
+///Enable or disable connector's segment overlapping with each other when executing the layout with multiple parents.
+///<br/>avoidSegmentOverlapping-boolean	default-false
+///<br/><br/>
 ///Defines the current culture of diagram
 ///<br/>locale-string	default-en-US
 ///<br/><br/>
@@ -9536,6 +9542,9 @@ ejDiagram :function (options) {
 ///Describes the transparency level of the region
 ///<br/>opacity-number	default-1
 ///<br/><br/>
+///defines the node border with a smooth transition from one color to another color.
+///<br/>borderGradient-any	default-null
+///<br/><br/>
 ///Defines the header of a swimlane/lane
 ///<br/>header-any	default-{ text: Title, fontSize: 11 }
 ///<br/><br/>
@@ -9634,6 +9643,9 @@ ejDiagram :function (options) {
 ///<br/><br/>
 ///Sets the overflowType of the labels
 ///<br/>overflowType-ej.datavisualization.Diagram.OverflowType|string	default-ej.datavisualization.Diagram.OverflowType.Ellipsis
+///<br/><br/>
+///To set the padding of the node label
+///<br/>padding-any	default-ej.datavisualization.Diagram.Padding()
 ///<br/><br/>
 ///Defines whether the label is editable or not
 ///<br/>readOnly-boolean	default-false
@@ -11689,7 +11701,7 @@ ejFileExplorer :function (options) {
 ///<br/>enableThumbnailCompress-boolean	default-false
 ///<br/><br/>
 ///Allows specified type of files only to display in FileExplorer control.
-///<br/>fileTypes-string	default-.
+///<br/>fileTypes-string	default-* . *
 ///<br/><br/>
 ///By using filterSettings property, you can customize the search functionality of the search bar in FileExplorer control.
 ///<br/>filterSettings-FilterSettings	default-
@@ -11850,6 +11862,12 @@ clearFilter:function(){
 /// To clear all the filtered columns in Gantt.
 /// </summary>
 },
+clearSorting:function(){
+/// <signature>
+/// <summary>
+/// To clear the sorted columns in Gantt.
+/// </summary>
+},
 collapseAllItems:function(){
 /// <signature>
 /// <summary>
@@ -11956,6 +11974,18 @@ filterContent:function(ejPredicate){
 /// <param name="ejPredicate"	type="Gantt.EjPredicate">Pass the filtering column details and conditions as ejPredicate instance. The ejPredicate object is defined as fieldName,filterOperator, filterValue and ignoreCase properties.</param>
 /// </signature>
 },
+getColumns:function(){
+/// <signature>
+/// <summary>
+/// To get available column collection in Gantt.
+/// </summary>
+},
+getResourceViewEditColumns:function(){
+/// <signature>
+/// <summary>
+/// To get the column collection which are used to edit the task by using task add/edit dialog in resource view.
+/// </summary>
+},
 hideColumn:function(headerText){
 /// <signature>
 /// <summary>
@@ -12022,6 +12052,14 @@ selectMultipleRows:function(rowIndexes){
 /// To select multiple rows dynamically.
 /// </summary>
 /// <param name="rowIndexes"	type="any[]">array of row indexes to select</param>
+/// </signature>
+},
+setScrollTop:function(Top){
+/// <signature>
+/// <summary>
+/// Method to set scroll top value for Gantt control.
+/// </summary>
+/// <param name="Top"	type="number">Pass a value to set top position of vertical scroll bar.</param>
 /// </signature>
 },
 setSplitterIndex:function(index){
@@ -12118,6 +12156,20 @@ updateRecordByIndex:function(index, data){
 /// <param name="data"	type="any">object with modified field value</param>
 /// </signature>
 },
+updateScheduleDates:function(startDate, endDate){
+/// <signature>
+/// <summary>
+/// To update the schedule start date and schedule end date of project.
+/// </summary>
+/// <param name="startDate"	type="string">New schedule start date of project</param>
+/// </signature>
+/// <signature>
+/// <summary>
+/// To update the schedule start date and schedule end date of project.
+/// </summary>
+/// <param name="endDate"	type="string">New schedule end date of project</param>
+/// </signature>
+},
 updateTaskId:function(currentId, newId){
 /// <signature>
 /// <summary>
@@ -12183,6 +12235,9 @@ ejGantt :function (options) {
 ///Enables or disables sorting. When enabled, we can sort the column by clicking on the column.
 ///<br/>allowSorting-boolean	default-false
 ///<br/><br/>
+///Enables or disables the rendering of unscheduled tasks.
+///<br/>allowUnscheduledTask-boolean	default-false
+///<br/><br/>
 ///Specifies the baseline background color in Gantt
 ///<br/>baselineColor-string	default-#fba41c
 ///<br/><br/>
@@ -12217,7 +12272,7 @@ ejGantt :function (options) {
 ///<br/>dateFormat-string	default-MM/dd/yyyy
 ///<br/><br/>
 ///Specifies the customized working time for tasks in Gantt
-///<br/>dayWorkingTime-Array&lt;any&gt;	default-[{ from: 08:00 AM, to: 12:00 PM }, { from: 01:00 PM, to: 05:00 PM }]
+///<br/>dayWorkingTime-Array&lt;any&gt;	default-[{ from: 08:00 AM, to: 12:00 PM , background:   }, { from: 01:00 PM, to: 05:00 PM , background:  }]
 ///<br/><br/>
 ///Option for customizing the drag tooltip while reordering the rows.
 ///<br/>dragTooltip-DragTooltip	default-
@@ -12348,6 +12403,9 @@ ejGantt :function (options) {
 ///Default Value
 ///<br/>groupNameMapping-string	default-
 ///<br/><br/>
+///Specifies whether to highlight the non working time in Gantt.
+///<br/>highlightNonWorkingTime-boolean	default-false
+///<br/><br/>
 ///Specifies whether to highlight the weekends in Gantt .
 ///<br/>highlightWeekends-boolean	default-true
 ///<br/><br/>
@@ -12383,6 +12441,9 @@ ejGantt :function (options) {
 ///<br/><br/>
 ///To Specify the JsRender script Id to customize the mile stone with our preference
 ///<br/>milestoneTemplate-string	default-
+///<br/><br/>
+///Specifies the background color for non working time in Gantt.
+///<br/>nonWorkingBackground-string	default-
 ///<br/><br/>
 ///Specifies the mapping property path for the task description in datasource
 ///<br/>notesMapping-string	default-
@@ -12643,7 +12704,7 @@ ejGantt :function (options) {
 ///<br/>showToolbar-boolean	default-true
 ///<br/><br/>
 ///Specifies the list of toolbar items to be rendered in Gantt toolbar
-///<br/>toolbarItems-Array&lt;any&gt;	default-[]
+///<br/>toolbarItems-array&lt;ej.Gantt.ToolbarItems|string&gt;	default-[]
 ///<br/><br/>
 ///Allows the user to insert custom toolbar items.
 ///<br/>customToolbarItems-Array&lt;any&gt;	default-
@@ -13106,13 +13167,11 @@ getCurrentViewData:function(){
 /// Get the current page data source of grid.
 /// </summary>
 },
-getDataByIndex:function(rowIndex){
+getDataByIndex:function(){
 /// <signature>
 /// <summary>
 /// Get the data of given row index in grid.
 /// </summary>
-/// <param name="rowIndex"	type="number">Pass the index of the row to get the corresponding data</param>
-/// </signature>
 },
 getFieldNameByHeaderText:function(headerText){
 /// <signature>
@@ -13312,6 +13371,14 @@ refreshContent:function(templateRefresh){
 /// Refresh the grid contents. The template refreshment is based on the argument passed along with this method
 /// </summary>
 /// <param name="templateRefresh"	type="boolean">optional When templateRefresh is set true, template and grid contents both are refreshed in grid else only grid content is refreshed</param>
+/// </signature>
+},
+refreshData:function(additionalParameters){
+/// <signature>
+/// <summary>
+/// Refresh the grid contents with updated server Data, using XMLHttpRequest. Url Path should be provided in Grid datasource otherwise it refreshes with local data without XMLHttpRequest.
+/// </summary>
+/// <param name="additionalParameters"	type="any">optionalData to the server </param>
 /// </signature>
 },
 refreshTemplate:function(){
@@ -14933,6 +15000,18 @@ ejKanban :function (options) {
 ///<br/><br/>
 ///To enable or disable DragAndDrop across swim lane.
 ///<br/>allowDragAndDrop-boolean	default-false
+///<br/><br/>
+///To enable or disable empty swimlane on Kanban board.  It is used to shown empty swimlane when no data's present on headers key mapping value.
+///<br/>showEmptySwimlane-boolean	default-false
+///<br/><br/>
+///Gets or sets an object that indicates to render the swimlane rows with specified swimlane headers.
+///<br/>headers-Array&lt;any&gt;	default-[]
+///<br/><br/>
+///Gets or sets a value that indicates to render the Kanban with specified swimlane header text.
+///<br/>text-string	default-null
+///<br/><br/>
+///Gets or sets a value that indicates to render the Kanban with specified swimlane header key.
+///<br/>key-string	default-null
 ///<br/><br/>
 ///Customize the settings for unassigned category of swim lane.
 ///<br/>unassignedGroup-any	default-Object
@@ -18050,6 +18129,18 @@ zoom:function(level, isAnimate){
 /// <param name="isAnimate"	type="boolean">Pass the boolean value to enable or disable animation while zooming</param>
 /// </signature>
 },
+refreshLayer:function(){
+/// <signature>
+/// <summary>
+/// Method to reload the specified layer based on layer and sublayer index value.
+/// </summary>
+},
+addMarkers:function(){
+/// <signature>
+/// <summary>
+/// Add markers dynamically based on layer and sublayer index value.
+/// </summary>
+},
 });
 return instance;
 };
@@ -18097,6 +18188,9 @@ ejMap :function (options) {
 ///<br/><br/>
 ///Enables or Disables the Zooming for map.
 ///<br/>zoomSettings-ZoomSettings	default-
+///<br/><br/>
+///Specifies animation duration for map shapes while zooming.
+///<br/>animationDuration-string	default-600
 ///<br/><br/>
 ///Enables or Disables the zooming of map
 ///<br/>enableZoom-boolean	default-true
@@ -18230,6 +18324,27 @@ ejMap :function (options) {
 ///set the smartLabelSize property
 ///<br/>smartLabelSize-ej.datavisualization.Map.LabelSize|string	default-fixed
 ///<br/><br/>
+///Options for customizing the data label font.
+///<br/>font-any	default-
+///<br/><br/>
+///Font family of the data label.
+///<br/>fontFamily-string	default-Segoe UI
+///<br/><br/>
+///Font style of the data label.
+///<br/>fontStyle-ej.datavisualization.Map.FontStyle|string	default-normal.
+///<br/><br/>
+///NameType DescriptionRegularstring Specifies the font weight as regular.BoldstringSpecifies the font weight as bold.LighterstringSpecifies the font weight as lighter.  
+///<br/>fontWeight-ej.datavisualization.Map.FontWeight|string	default-regular. See
+///<br/><br/>
+///Opacity of the text.
+///<br/>opacity-number	default-1
+///<br/><br/>
+///Font color of the data label text.
+///<br/>color-string	default-null
+///<br/><br/>
+///Font size of the data label.
+///<br/>size-string	default-12px
+///<br/><br/>
 ///Specifies the map view type.
 ///<br/>geometryType-ej.datavisualization.Map.GeometryType|string	default-&#39;geographic&#39;
 ///<br/><br/>
@@ -18286,6 +18401,9 @@ ejMap :function (options) {
 ///<br/><br/>
 ///Enables or Disables the showLegend
 ///<br/>showLegend-boolean	default-false
+///<br/><br/>
+///Toggle the visibility of the legend.
+///<br/>toggleVisibility-boolean	default-false
 ///<br/><br/>
 ///to get title of legend setting
 ///<br/>title-string	default-null
@@ -19523,6 +19641,40 @@ zoomTo:function(zoomValue){
 /// </summary>
 /// <param name="zoomValue"	type="number">zoom value for scaling the pages in the PDF Viewer</param>
 /// </signature>
+},
+searchText:function(targetText){
+/// <signature>
+/// <summary>
+/// Searches the target text in the PDF document and highlights the occurrences in the pages.
+/// </summary>
+/// <param name="targetText"	type="string">The text to be searched in the pages in the PDF viewer.</param>
+/// </signature>
+},
+searchNext:function(){
+/// <signature>
+/// <summary>
+/// Searches the next occurrence of the searched text from the current occurrence in the PDF viewer control.
+/// </summary>
+},
+searchPrevious:function(){
+/// <signature>
+/// <summary>
+/// Searches the previous occurrence of the searched text from the current occurrence in the PDF viewer control.
+/// </summary>
+},
+matchCase:function(enableMatchCase){
+/// <signature>
+/// <summary>
+/// Searches the target text with its casing.
+/// </summary>
+/// <param name="enableMatchCase"	type="boolean">Specifies whether the text search must be performed with match case or not.</param>
+/// </signature>
+},
+cancelSearchText:function(){
+/// <signature>
+/// <summary>
+/// Cancels the text search and removes the highlighted occurrences from the PDF viewer.
+/// </summary>
 },
 addAnnotation:function(annotationType){
 /// <signature>
@@ -22706,6 +22858,9 @@ ejRangeNavigator :function (options) {
 ///Toggles the placement of slider exactly on the place it left or on the nearest interval.
 ///<br/>allowSnapping-boolean	default-false
 ///<br/><br/>
+///It allows to show the value between the particular periods (i.e) from 1st January to 31st February and so on. The default value is true. If we set the property as false, it allows to show the value between the particular periods.(i.e) from 1st January to 31st January and so on.
+///<br/>allowNextValue-boolean	default-true
+///<br/><br/>
 ///Options for customizing the color, opacity and width of the chart border.
 ///<br/>border-Border	default-
 ///<br/><br/>
@@ -22814,6 +22969,9 @@ ejRangeNavigator :function (options) {
 ///Specifies the position of the labels to render either inside or outside of plot area
 ///<br/>labelPlacement-ej.datavisualization.RangeNavigator.LabelPlacement|string	default-outside
 ///<br/><br/>
+///Specifies to hide the labels when it intersects with each other.
+///<br/>labelIntersectAction-ej.datavisualization.RangeNavigator.LabelIntersectAction|string	default-none
+///<br/><br/>
 ///Specifies the position of the labels in higher level
 ///<br/>position-ej.datavisualization.RangeNavigator.Position|string	default-top
 ///<br/><br/>
@@ -22879,6 +23037,9 @@ ejRangeNavigator :function (options) {
 ///<br/><br/>
 ///Specifies the position of the labels to render either inside or outside of plot area. See LabelPlacement
 ///<br/>labelPlacement-ej.datavisualization.RangeNavigator.LabelPlacement|string	default-outside
+///<br/><br/>
+///Specifies to hide the labels when it intersects with each other.
+///<br/>labelIntersectAction-ej.datavisualization.RangeNavigator.LabelIntersectAction|string	default-none
 ///<br/><br/>
 ///Specifies the position of the labels in lower level.See Position
 ///<br/>position-ej.datavisualization.RangeNavigator.Position|string	default-bottom
@@ -23430,6 +23591,235 @@ ejRecurrenceEditor :function (options) {
 ///<br/><br/>
 ///Accepts the custom CSS class name, that defines user-defined styles and themes to be applied on partial or complete elements of the Recurrence Editor.
 ///<br/>cssClass-string	default-
+///</summary>
+///<param name="options" type="Object">
+///The widget configuration options
+///</param>
+///</signature>
+}
+});
+intellisense.annotate(ej,{
+ReportDesigner:function(){
+ /// <signature>
+ /// <summary>Constructor of ej.ReportDesigner</summary>
+ /// </signature>
+}
+});
+ej.ReportDesigner=(function(){
+var original=ej.ReportDesigner
+var wrapper=function(){
+var instance = new original();
+intellisense.annotate(instance, {
+
+canCopy:function(){
+/// <signature>
+/// <summary>
+/// Determines whether a copy operation is possible.
+/// </summary>
+},
+canCut:function(){
+/// <signature>
+/// <summary>
+/// Determines whether a cut operation is possible.
+/// </summary>
+},
+canRemove:function(){
+/// <signature>
+/// <summary>
+/// Determines whether a delete operation is possible.
+/// </summary>
+},
+canPaste:function(){
+/// <signature>
+/// <summary>
+/// Determines whether a paste operation is possible.
+/// </summary>
+},
+canRedo:function(){
+/// <signature>
+/// <summary>
+/// Returns the bool value indicating whether the user can redo the previous action in the report.
+/// </summary>
+},
+canUndo:function(){
+/// <signature>
+/// <summary>
+/// Returns a bool value indicating whether the user can undo the previous action in the report.
+/// </summary>
+},
+copy:function(){
+/// <signature>
+/// <summary>
+/// Copies the selected ReportItem from design panel to Report Designer internal clipboard.
+/// </summary>
+},
+cut:function(){
+/// <signature>
+/// <summary>
+/// Cuts the selected ReportItem from design panel to Report Designer internal clipboard.
+/// </summary>
+},
+remove:function(){
+/// <signature>
+/// <summary>
+/// Deletes the selected item from the report.
+/// </summary>
+},
+hasReportChanges:function(){
+/// <signature>
+/// <summary>
+/// Returns the bool value that specifies whether the report has changes or not.
+/// </summary>
+},
+isNewReport:function(){
+/// <signature>
+/// <summary>
+/// Returns the bool value that specifies whether the currently processing report is a new report or not.
+/// </summary>
+},
+isNewServerReport:function(){
+/// <signature>
+/// <summary>
+/// Returns the bool value that specifies whether the currently processing report is a new server report or not.
+/// </summary>
+},
+isServerReport:function(){
+/// <signature>
+/// <summary>
+/// Returns the bool value that specifies whether the currently processing report is obtained from the server or local.
+/// </summary>
+},
+newReport:function(){
+/// <signature>
+/// <summary>
+/// To create a new report.
+/// </summary>
+},
+newServerReport:function(){
+/// <signature>
+/// <summary>
+/// To create a new report in the server.
+/// </summary>
+},
+openReport:function(){
+/// <signature>
+/// <summary>
+/// This method opens the report from the ReportServer.
+/// </summary>
+},
+openReportFromDevice:function(){
+/// <signature>
+/// <summary>
+/// To open the report client browse dialog.
+/// </summary>
+},
+openServerReportDialog:function(){
+/// <signature>
+/// <summary>
+/// To open the report open server browse dialog.
+/// </summary>
+},
+paste:function(){
+/// <signature>
+/// <summary>
+/// Pastes the selected ReportItem from Report Designer internal clipboard to design panel.
+/// </summary>
+},
+redo:function(){
+/// <signature>
+/// <summary>
+/// Reverses the action of the last Undo command.
+/// </summary>
+},
+saveReport:function(){
+/// <signature>
+/// <summary>
+/// This method saves the report into the ReportServer.
+/// </summary>
+},
+saveServerReportDialog:function(){
+/// <signature>
+/// <summary>
+/// To open the report save server browse dialog.
+/// </summary>
+},
+saveToDevice:function(){
+/// <signature>
+/// <summary>
+/// To download the designed report.
+/// </summary>
+},
+showDesign:function(){
+/// <signature>
+/// <summary>
+/// To show the report design.
+/// </summary>
+},
+showNewReportDialog:function(){
+/// <signature>
+/// <summary>
+/// To open the new report dialog.
+/// </summary>
+},
+showOpenSaveReportDialog:function(){
+/// <signature>
+/// <summary>
+/// To open the server browse dialog.
+/// </summary>
+},
+showPreview:function(){
+/// <signature>
+/// <summary>
+/// To show the report preview.
+/// </summary>
+},
+undo:function(){
+/// <signature>
+/// <summary>
+/// Reverses the last action that was performed.
+/// </summary>
+},
+});
+return instance;
+};
+intellisense.redirectDefinition(wrapper, original);
+return wrapper;
+})();
+jQuery.fn.ejReportDesigner=function(){
+this.data("ejReportDesigner",new	ej.ReportDesigner());
+return this;
+};
+intellisense.annotate(jQuery.fn,{
+ejReportDesigner :function (options) {
+/// <signature>
+/// <summary><br/>
+///Report Designer allows to design the report that can be published in the Server or downloaded in the local physical path.<br/><br/>
+///Specifies the locale for report designer.
+///<br/>locale-string	default-en-US
+///<br/><br/>
+///Gets or Sets the report path of server.
+///<br/>reportPath-string	default-null
+///<br/><br/>
+///Gets or Sets the reports server URL.
+///<br/>reportServerUrl-string	default-null
+///<br/><br/>
+///Gets or sets the serviceAuthorizationToken to access the Report Server API services.
+///<br/>serviceAuthorizationToken-string	default-empty
+///<br/><br/>
+///Gets or Sets the URL of the  WebAPI service; it will be used for processing the report.
+///<br/>serviceUrl-string	default-null
+///<br/><br/>
+///Specifies the toolbar settings.
+///<br/>toolbarSettings-ToolbarSettings	default-
+///<br/><br/>
+///Shows or hides the grouped items in the toolbar with the help of enum ej.ReportDesigner.ToolbarItems.
+///<br/>items-ej.ReportDesigner.ToolbarItems|string	default-ej.ReportDesigner.ToolbarItems.All
+///<br/><br/>
+///Shows or hides the toolbar.
+///<br/>showToolbar-boolean	default-true
+///<br/><br/>
+///Specifies the toolbar template ID.
+///<br/>templateId-string	default-empty
 ///</summary>
 ///<param name="options" type="Object">
 ///The widget configuration options
@@ -24639,11 +25029,13 @@ insertRow:function(before, cell){
 /// <param name="cell"	type="JQuery">Row will be added based on the given cell element</param>
 /// </signature>
 },
-pasteContent:function(){
+pasteContent:function(html){
 /// <signature>
 /// <summary>
 /// This method helps to insert/paste the content at the current cursor (caret) position or the selected content to be replaced with our text by passing the value as parameter to the pasteContent method in the Editor.
 /// </summary>
+/// <param name="html"	type="string">paste content</param>
+/// </signature>
 },
 refresh:function(){
 /// <signature>
@@ -27625,12 +28017,18 @@ setSheetFocus:function(){
 /// This method is used to set the focus to the Spreadsheet.
 /// </summary>
 },
-setWidthToColumns:function(widthColl){
+setWidthToColumns:function(widthColl, sheetIndex){
 /// <signature>
 /// <summary>
 /// This method is used to set the width for the columns in the Spreadsheet.
 /// </summary>
 /// <param name="widthColl"	type="any[]|any">Pass the column index and width of the columns.</param>
+/// </signature>
+/// <signature>
+/// <summary>
+/// This method is used to set the width for the columns in the Spreadsheet.
+/// </summary>
+/// <param name="sheetIndex"	type="number">Optional. If sheetIdx is specified, it will set the width for columns to the specified sheet else it will use active sheet.</param>
 /// </signature>
 },
 sheetRename:function(sheetName){
@@ -30257,6 +30655,14 @@ addRow:function(data, rowPosition){
 /// <param name="rowPosition"	type="string">Defines in which position the row wants to be added</param>
 /// </signature>
 },
+clearFilter:function(fieldName){
+/// <signature>
+/// <summary>
+/// Clears the filter applied to a specific column.
+/// </summary>
+/// <param name="fieldName"	type="string">Pass the column field name to clear filtering done in that column.</param>
+/// </signature>
+},
 clearSelection:function(index){
 /// <signature>
 /// <summary>
@@ -30265,32 +30671,32 @@ clearSelection:function(index){
 /// <param name="index"	type="number">you can pass a row index to clear the row selection.</param>
 /// </signature>
 },
-selectCells:function(Indexes, preservePreviousSelectedCell){
+clearSorting:function(){
 /// <signature>
 /// <summary>
-/// To select cell based on the cell and row index dynamically.
+/// To clear the sorting from sorted columns in TreeGrid.
 /// </summary>
-/// <param name="Indexes"	type="any[]">array of cell indexes to be select</param>
-/// </signature>
+},
+collapseAll:function(){
 /// <signature>
 /// <summary>
-/// To select cell based on the cell and row index dynamically.
+/// To collapse all the parent items in tree grid
 /// </summary>
-/// <param name="preservePreviousSelectedCell"	type="boolean">Defines that we need to preserve the previously selected cells or not</param>
+},
+collapseAtLevel:function(index){
+/// <signature>
+/// <summary>
+/// Collapses the records at specific hierarchical level
+/// </summary>
+/// <param name="index"	type="number">you can pass the particular level as index.</param>
 /// </signature>
 },
-renameColumn:function(columnIndex, name){
+columnIndex:function(Index){
 /// <signature>
 /// <summary>
-/// To rename a column with the specified name
+/// To change the index of the tree column in TreeGrid.
 /// </summary>
-/// <param name="columnIndex"	type="number">Index of the column to be renamed</param>
-/// </signature>
-/// <signature>
-/// <summary>
-/// To rename a column with the specified name
-/// </summary>
-/// <param name="name"	type="string">Header text of the column </param>
+/// <param name="Index"	type="number">Pass the column index to make the column as treeColumnIndex.</param>
 /// </signature>
 },
 deleteColumn:function(columnIndex){
@@ -30301,19 +30707,11 @@ deleteColumn:function(columnIndex){
 /// <param name="columnIndex"	type="number">Index of the column to be deleted</param>
 /// </signature>
 },
-collapseAll:function(){
+expandAll:function(){
 /// <signature>
 /// <summary>
-/// To collapse all the parent items in tree grid
+/// To expand all the root level nodes in TreeGrid.
 /// </summary>
-},
-hideColumn:function(headerText){
-/// <signature>
-/// <summary>
-/// To hide the column by using header text
-/// </summary>
-/// <param name="headerText"	type="string">you can pass a header text of a column to hide.</param>
-/// </signature>
 },
 expandAtLevel:function(index){
 /// <signature>
@@ -30323,200 +30721,6 @@ expandAtLevel:function(index){
 /// <param name="index"	type="number">you can pass the level as index number to expand</param>
 /// </signature>
 },
-collapseAtLevel:function(index){
-/// <signature>
-/// <summary>
-/// Collapses the records at specific hierarchical level
-/// </summary>
-/// <param name="index"	type="number">you can pass the particular level as index.</param>
-/// </signature>
-},
-refresh:function(dataSource, query){
-/// <signature>
-/// <summary>
-/// To refresh the changes in tree grid
-/// </summary>
-/// <param name="dataSource"	type="any[]">Pass which data source you want to show in tree grid</param>
-/// </signature>
-/// <signature>
-/// <summary>
-/// To refresh the changes in tree grid
-/// </summary>
-/// <param name="query"	type="any">Pass which data you want to show in tree grid</param>
-/// </signature>
-},
-freezePrecedingColumns:function(field){
-/// <signature>
-/// <summary>
-/// Freeze all the columns preceding to the column specified by the field name.
-/// </summary>
-/// <param name="field"	type="string">Freeze all Columns before this field column.</param>
-/// </signature>
-},
-freezeColumn:function(field, isFrozen){
-/// <signature>
-/// <summary>
-/// Freeze/unfreeze the specified column.
-/// </summary>
-/// <param name="field"	type="string">Freeze/Unfreeze this field column.</param>
-/// </signature>
-/// <signature>
-/// <summary>
-/// Freeze/unfreeze the specified column.
-/// </summary>
-/// <param name="isFrozen"	type="boolean">Decides to Freeze/Unfreeze this field column.</param>
-/// </signature>
-},
-saveCell:function(){
-/// <signature>
-/// <summary>
-/// To save the edited cell in TreeGrid
-/// </summary>
-},
-showColumn:function(headerText){
-/// <signature>
-/// <summary>
-/// To show the column by using header text
-/// </summary>
-/// <param name="headerText"	type="string">you can pass a header text of a column to show.</param>
-/// </signature>
-},
-sortColumn:function(fieldName, columnSortDirection){
-/// <signature>
-/// <summary>
-/// To sorting the data based on the particular fields
-/// </summary>
-/// <param name="fieldName"	type="string">you can pass a name of column to sort.</param>
-/// </signature>
-/// <signature>
-/// <summary>
-/// To sorting the data based on the particular fields
-/// </summary>
-/// <param name="columnSortDirection"	type="string">you can pass a sort direction to sort the column.</param>
-/// </signature>
-},
-moveRow:function(fromIndex, toIndex, position){
-/// <signature>
-/// <summary>
-/// To move the TreeGrid rows programmatically with from index ,to index and position.
-/// </summary>
-/// <param name="fromIndex"	type="number">you can pass drag Index of the row</param>
-/// </signature>
-/// <signature>
-/// <summary>
-/// To move the TreeGrid rows programmatically with from index ,to index and position.
-/// </summary>
-/// <param name="toIndex"	type="number">you can pass target Index of the row.</param>
-/// </signature>
-/// <signature>
-/// <summary>
-/// To move the TreeGrid rows programmatically with from index ,to index and position.
-/// </summary>
-/// <param name="position"	type="string">you can pass the drop position as above,below,child</param>
-/// </signature>
-},
-reorderColumn:function(fieldName, targetIndex){
-/// <signature>
-/// <summary>
-/// To reorder the column with field name and target index values
-/// </summary>
-/// <param name="fieldName"	type="string">you can pass a name of column to reorder.</param>
-/// </signature>
-/// <signature>
-/// <summary>
-/// To reorder the column with field name and target index values
-/// </summary>
-/// <param name="targetIndex"	type="string">you can pass a target column index to be inserted.</param>
-/// </signature>
-},
-getUpdatedRecords:function(){
-/// <signature>
-/// <summary>
-/// To get the updated data source of TreeGrid.
-/// </summary>
-},
-gotoPage:function(PageIndex){
-/// <signature>
-/// <summary>
-/// Sends request to navigate to a specific page in TreeGrid.
-/// </summary>
-/// <param name="PageIndex"	type="number">Pass the page index to perform paging at specified page index.</param>
-/// </signature>
-},
-updateCheckboxColumn:function(fieldName){
-/// <signature>
-/// <summary>
-/// To change the checkbox selection to any column.
-/// </summary>
-/// <param name="fieldName"	type="string">Pass the column field name to check box selection to that column.</param>
-/// </signature>
-},
-getSelectedCells:function(){
-/// <signature>
-/// <summary>
-/// Gets the selected cell(s) element details in TreeGrid.
-/// </summary>
-},
-updateResponsiveMinWidth:function(width){
-/// <signature>
-/// <summary>
-/// Sets the minimum responsive width for TreeGrid.
-/// </summary>
-/// <param name="width"	type="string">Pass the minimum responsive width, above which the TreeGrid needs to work in responsive mode.</param>
-/// </signature>
-},
-showAddDialog:function(){
-/// <signature>
-/// <summary>
-/// To open the dialog to add new record/row in TreeGrid.
-/// </summary>
-},
-showEditDialog:function(Index){
-/// <signature>
-/// <summary>
-/// To open the dialog to edit a row/record in TreeGrid.
-/// </summary>
-/// <param name="Index"	type="number">Pass the index of row to be edit.</param>
-/// </signature>
-},
-scrollOffset:function(Left, Top){
-/// <signature>
-/// <summary>
-/// Sets the scroll left and scroll top offsets of TreeGrid.
-/// </summary>
-/// <param name="Left"	type="string">Pass a value to set left position of horizontal scroll bar.</param>
-/// </signature>
-/// <signature>
-/// <summary>
-/// Sets the scroll left and scroll top offsets of TreeGrid.
-/// </summary>
-/// <param name="Top"	type="string">Pass a value to set top position of vertical scroll bar.</param>
-/// </signature>
-},
-getScrollTopOffset:function(){
-/// <signature>
-/// <summary>
-/// Gets the scroll top offset of TreeGrid.
-/// </summary>
-},
-getScrollLeftOffset:function(){
-/// <signature>
-/// <summary>
-/// Gets the scroll left offset of TreeGrid.
-/// </summary>
-},
-scrollToTop:function(){
-/// <signature>
-/// <summary>
-/// Sets the scroll top offset of TreeGrid to 0.
-/// </summary>
-},
-scrollToBottom:function(){
-/// <signature>
-/// <summary>
-/// Sets the scroll top offset of TreeGrid to maximum value.
-/// </summary>
-},
 expandCollapseRow:function(Index){
 /// <signature>
 /// <summary>
@@ -30525,18 +30729,12 @@ expandCollapseRow:function(Index){
 /// <param name="Index"	type="number">Pass the row index of row to expand/collapse.</param>
 /// </signature>
 },
-expandAll:function(){
+expandCollapseTotalSummary:function(expanded){
 /// <signature>
 /// <summary>
-/// To expand all the root level nodes in TreeGrid.
+/// To expand collapse the total summary row.
 /// </summary>
-},
-showHideDetailsRow:function(rowIndex){
-/// <signature>
-/// <summary>
-/// Show/Hide the detail row of a specific record.
-/// </summary>
-/// <param name="rowIndex"	type="number">Pass the row index of record to show/hide the detail row.</param>
+/// <param name="expanded"	type="boolean">Decides to expand/collapse the total summary</param>
 /// </signature>
 },
 filterColumn:function(fieldName, filterOperator, filterValue, predicate, matchcase, actualFilterValue){
@@ -30585,19 +30783,43 @@ filterContent:function(ejPredicate){
 /// <param name="ejPredicate"	type="TreeGrid.EjPredicate">Pass the filtering column details and conditions as ejPredicate instance. ejPredicate object is defined as fieldName,filterOperator, filterValue and ignoreCase properties</param>
 /// </signature>
 },
-columnIndex:function(Index){
+freezeColumn:function(field, isFrozen){
 /// <signature>
 /// <summary>
-/// To change the index of the tree column in TreeGrid.
+/// Freeze/unfreeze the specified column.
 /// </summary>
-/// <param name="Index"	type="number">Pass the column index to make the column as treeColumnIndex.</param>
+/// <param name="field"	type="string">Freeze/Unfreeze this field column.</param>
+/// </signature>
+/// <signature>
+/// <summary>
+/// Freeze/unfreeze the specified column.
+/// </summary>
+/// <param name="isFrozen"	type="boolean">Decides to Freeze/Unfreeze this field column.</param>
 /// </signature>
 },
-clearSorting:function(){
+freezePrecedingColumns:function(field){
 /// <signature>
 /// <summary>
-/// To clear the sorting from sorted columns in TreeGrid.
+/// Freeze all the columns preceding to the column specified by the field name.
 /// </summary>
+/// <param name="field"	type="string">Freeze all Columns before this field column.</param>
+/// </signature>
+},
+getColumnByField:function(fieldName){
+/// <signature>
+/// <summary>
+/// Gets the column object of specific column.
+/// </summary>
+/// <param name="fieldName"	type="string">Pass the column field name to get details of that column.</param>
+/// </signature>
+},
+getColumnByHeaderText:function(headerText){
+/// <signature>
+/// <summary>
+/// Gets the column object of specific column.
+/// </summary>
+/// <param name="headerText"	type="string">Pass the column header text to get details of that column.</param>
+/// </signature>
 },
 getColumnIndexByField:function(fieldName){
 /// <signature>
@@ -30615,28 +30837,226 @@ getFieldNameByHeaderText:function(headerText){
 /// <param name="headerText"	type="string">Pass the column header text to get its field name.</param>
 /// </signature>
 },
-getColumnByHeaderText:function(headerText){
+getScrollLeftOffset:function(){
 /// <signature>
 /// <summary>
-/// Gets the column object of specific column.
+/// Gets the scroll left offset of TreeGrid.
 /// </summary>
-/// <param name="headerText"	type="string">Pass the column header text to get details of that column.</param>
+},
+getScrollTopOffset:function(){
+/// <signature>
+/// <summary>
+/// Gets the scroll top offset of TreeGrid.
+/// </summary>
+},
+getSelectedCells:function(){
+/// <signature>
+/// <summary>
+/// Gets the selected cell(s) element details in TreeGrid.
+/// </summary>
+},
+getUpdatedRecords:function(){
+/// <signature>
+/// <summary>
+/// To get the updated data source of TreeGrid.
+/// </summary>
+},
+gotoPage:function(PageIndex){
+/// <signature>
+/// <summary>
+/// Sends request to navigate to a specific page in TreeGrid.
+/// </summary>
+/// <param name="PageIndex"	type="number">Pass the page index to perform paging at specified page index.</param>
 /// </signature>
 },
-clearFilter:function(fieldName){
+hideColumn:function(headerText){
 /// <signature>
 /// <summary>
-/// Clears the filter applied to a specific column.
+/// To hide the column by using header text
 /// </summary>
-/// <param name="fieldName"	type="string">Pass the column field name to clear filtering done in that column.</param>
+/// <param name="headerText"	type="string">you can pass a header text of a column to hide.</param>
 /// </signature>
 },
-getColumnByField:function(fieldName){
+moveRow:function(fromIndex, toIndex, position){
 /// <signature>
 /// <summary>
-/// Gets the column object of specific column.
+/// To move the TreeGrid rows programmatically with from index ,to index and position.
 /// </summary>
-/// <param name="fieldName"	type="string">Pass the column field name to get details of that column.</param>
+/// <param name="fromIndex"	type="number">you can pass drag Index of the row</param>
+/// </signature>
+/// <signature>
+/// <summary>
+/// To move the TreeGrid rows programmatically with from index ,to index and position.
+/// </summary>
+/// <param name="toIndex"	type="number">you can pass target Index of the row.</param>
+/// </signature>
+/// <signature>
+/// <summary>
+/// To move the TreeGrid rows programmatically with from index ,to index and position.
+/// </summary>
+/// <param name="position"	type="string">you can pass the drop position as above,below,child</param>
+/// </signature>
+},
+refresh:function(dataSource, query){
+/// <signature>
+/// <summary>
+/// To refresh the changes in tree grid
+/// </summary>
+/// <param name="dataSource"	type="any[]">Pass which data source you want to show in tree grid</param>
+/// </signature>
+/// <signature>
+/// <summary>
+/// To refresh the changes in tree grid
+/// </summary>
+/// <param name="query"	type="any">Pass which data you want to show in tree grid</param>
+/// </signature>
+},
+renameColumn:function(columnIndex, name){
+/// <signature>
+/// <summary>
+/// To rename a column with the specified name
+/// </summary>
+/// <param name="columnIndex"	type="number">Index of the column to be renamed</param>
+/// </signature>
+/// <signature>
+/// <summary>
+/// To rename a column with the specified name
+/// </summary>
+/// <param name="name"	type="string">Header text of the column </param>
+/// </signature>
+},
+reorderColumn:function(fieldName, targetIndex){
+/// <signature>
+/// <summary>
+/// To reorder the column with field name and target index values
+/// </summary>
+/// <param name="fieldName"	type="string">you can pass a name of column to reorder.</param>
+/// </signature>
+/// <signature>
+/// <summary>
+/// To reorder the column with field name and target index values
+/// </summary>
+/// <param name="targetIndex"	type="string">you can pass a target column index to be inserted.</param>
+/// </signature>
+},
+saveCell:function(){
+/// <signature>
+/// <summary>
+/// To save the edited cell in TreeGrid
+/// </summary>
+},
+scrollOffset:function(Left, Top){
+/// <signature>
+/// <summary>
+/// Sets the scroll left and scroll top offsets of TreeGrid.
+/// </summary>
+/// <param name="Left"	type="string">Pass a value to set left position of horizontal scroll bar.</param>
+/// </signature>
+/// <signature>
+/// <summary>
+/// Sets the scroll left and scroll top offsets of TreeGrid.
+/// </summary>
+/// <param name="Top"	type="string">Pass a value to set top position of vertical scroll bar.</param>
+/// </signature>
+},
+scrollToBottom:function(){
+/// <signature>
+/// <summary>
+/// Sets the scroll top offset of TreeGrid to maximum value.
+/// </summary>
+},
+scrollToTop:function(){
+/// <signature>
+/// <summary>
+/// Sets the scroll top offset of TreeGrid to 0.
+/// </summary>
+},
+selectCells:function(Indexes, preservePreviousSelectedCell){
+/// <signature>
+/// <summary>
+/// To select cell based on the cell and row index dynamically.
+/// </summary>
+/// <param name="Indexes"	type="any[]">array of cell indexes to be select</param>
+/// </signature>
+/// <signature>
+/// <summary>
+/// To select cell based on the cell and row index dynamically.
+/// </summary>
+/// <param name="preservePreviousSelectedCell"	type="boolean">Defines that we need to preserve the previously selected cells or not</param>
+/// </signature>
+},
+showAddDialog:function(){
+/// <signature>
+/// <summary>
+/// To open the dialog to add new record/row in TreeGrid.
+/// </summary>
+},
+showColumn:function(headerText){
+/// <signature>
+/// <summary>
+/// To show the column by using header text
+/// </summary>
+/// <param name="headerText"	type="string">you can pass a header text of a column to show.</param>
+/// </signature>
+},
+showEditDialog:function(Index){
+/// <signature>
+/// <summary>
+/// To open the dialog to edit a row/record in TreeGrid.
+/// </summary>
+/// <param name="Index"	type="number">Pass the index of row to be edit.</param>
+/// </signature>
+},
+showHideDetailsRow:function(rowIndex){
+/// <signature>
+/// <summary>
+/// Show/Hide the detail row of a specific record.
+/// </summary>
+/// <param name="rowIndex"	type="number">Pass the row index of record to show/hide the detail row.</param>
+/// </signature>
+},
+sortColumn:function(fieldName, columnSortDirection){
+/// <signature>
+/// <summary>
+/// To sorting the data based on the particular fields
+/// </summary>
+/// <param name="fieldName"	type="string">you can pass a name of column to sort.</param>
+/// </signature>
+/// <signature>
+/// <summary>
+/// To sorting the data based on the particular fields
+/// </summary>
+/// <param name="columnSortDirection"	type="string">you can pass a sort direction to sort the column.</param>
+/// </signature>
+},
+updateCheckboxColumn:function(fieldName){
+/// <signature>
+/// <summary>
+/// To change the checkbox selection to any column.
+/// </summary>
+/// <param name="fieldName"	type="string">Pass the column field name to check box selection to that column.</param>
+/// </signature>
+},
+updateRecordByIndex:function(index, data){
+/// <signature>
+/// <summary>
+/// To update the value of TreeGrid row by using row index.
+/// </summary>
+/// <param name="index"	type="number">index of record to be updated</param>
+/// </signature>
+/// <signature>
+/// <summary>
+/// To update the value of TreeGrid row by using row index.
+/// </summary>
+/// <param name="data"	type="any">object with modified field value</param>
+/// </signature>
+},
+updateResponsiveMinWidth:function(width){
+/// <signature>
+/// <summary>
+/// Sets the minimum responsive width for TreeGrid.
+/// </summary>
+/// <param name="width"	type="string">Pass the minimum responsive width, above which the TreeGrid needs to work in responsive mode.</param>
 /// </signature>
 },
 });
@@ -30654,11 +31074,11 @@ ejTreeGrid :function (options) {
 /// <signature>
 /// <summary><br/>
 ///Custom Design for HTML TreeGrid control.<br/><br/>
-///Enables or disables the ability to resize the column width interactively.
-///<br/>allowColumnResize-boolean	default-false
-///<br/><br/>
 ///Enables or disables the option for column reordering
 ///<br/>allowColumnReordering-boolean	default-false
+///<br/><br/>
+///Enables or disables the ability to resize the column width interactively.
+///<br/>allowColumnResize-boolean	default-false
 ///<br/><br/>
 ///Enables or disables the ability to drag and drop the row interactively to reorder the rows.
 ///<br/>allowDragAndDrop-boolean	default-false
@@ -30672,17 +31092,17 @@ ejTreeGrid :function (options) {
 ///Enables or disables the ability to sort the rows based on multiple columns/fields by clicking on each column header. Rows will be sorted recursively on clicking the column headers.
 ///<br/>allowMultiSorting-boolean	default-false
 ///<br/><br/>
+///Enables/disables pagination of rows in TreeGrid
+///<br/>allowPaging-boolean	default-false
+///<br/><br/>
+///Enables or disables the toolbar searching in TreeGrid.
+///<br/>allowSearching-boolean	default-false
+///<br/><br/>
 ///Enables or disables the ability to select a row interactively.
 ///<br/>allowSelection-boolean	default-true
 ///<br/><br/>
 ///Enables or disables the ability to sort the rows based on a single field/column by clicking on that column header. When enabled, rows can be sorted only by single field/column.
 ///<br/>allowSorting-boolean	default-false
-///<br/><br/>
-///Enables or disables the toolbar searching in TreeGrid.
-///<br/>allowSearching-boolean	default-false
-///<br/><br/>
-///Enables/disables pagination of rows in TreeGrid
-///<br/>allowPaging-boolean	default-false
 ///<br/><br/>
 ///Gets or sets a value that indicates whether the Content will wrap to the next line if the content exceeds the boundary of the Column Cells.
 ///<br/>allowTextWrap-boolean	default-false
@@ -30690,14 +31110,32 @@ ejTreeGrid :function (options) {
 ///Specifies the id of the template that has to be applied for alternate rows.
 ///<br/>altRowTemplateID-string	default-
 ///<br/><br/>
-///Specifies the mapping property path for the expand status of a record in data source.
-///<br/>expandStateMapping-string	default-
+///Specifies the template for cell tooltip
+///<br/>cellTooltipTemplate-string	default-null
 ///<br/><br/>
 ///Specifies the mapping property path for sub tasks in datasource
 ///<br/>childMapping-string	default-
 ///<br/><br/>
+///Enables or disables the expandable/collapsible footer summary row. By default expander icon for footer summary will be rendered in first column of first summary row.
+///<br/>collapsibleTotalSummary-boolean	default-false
+///<br/><br/>
+///To Specify the column fields to be displayed in the dialog while inserting a column using column menu.
+///<br/>columnDialogFields-Array&lt;any&gt;	default-[]
+///<br/><br/>
+///Specifies the settings for column resize
+///<br/>columnResizeSettings-ColumnResizeSettings	default-
+///<br/><br/>
+///Specifies the mode for column resizing
+///<br/>columnResizeMode-ej.TreeGrid.ColumnResizeMode|string	default-ej.TreeGrid.ColumnResizeMode.Normal
+///<br/><br/>
 ///Option for adding columns; each column has the option to bind to a field in the dataSource.
 ///<br/>columns-Array&lt;Columns&gt;	default-
+///<br/><br/>
+///Enables/disables cell selection.
+///<br/>allowCellSelection-boolean	default-false
+///<br/><br/>
+///Enables or disables the ability to edit a row or cell.
+///<br/>allowEditing-boolean	default-false
 ///<br/><br/>
 ///Enables or disables the ability to filter the rows based on this column.
 ///<br/>allowFiltering-boolean	default-false
@@ -30705,77 +31143,17 @@ ejTreeGrid :function (options) {
 ///Enables the blanks option in ejDropDownList mapped in TreeGrid column
 ///<br/>allowFilteringBlankContent-boolean	default-true
 ///<br/><br/>
+///Enables or disables the ability to freeze/unfreeze the columns
+///<br/>allowFreezing-boolean	default-false
+///<br/><br/>
 ///Enables or disables the ability to sort the rows based on this column/field.
 ///<br/>allowSorting-boolean	default-false
-///<br/><br/>
-///Enables/disables cell selection.
-///<br/>allowCellSelection-boolean	default-false
-///<br/><br/>
-///To customize the ej controls defined in TreeGrid column with their native property.
-///<br/>editParams-any	default-
-///<br/><br/>
-///Gets or sets a template that displays a custom editor for editing the column values.
-///<br/>editTemplate-any	default-null
-///<br/><br/>
-///Specifies the edit type of the column.
-///<br/>editType-ej.TreeGrid.EditingType|string	default-ej.TreeGrid.EditingType.String
-///<br/><br/>
-///To bind the dropdown data for TreeGrid column mapped with ejDropDownList
-///<br/>dropdownData-string	default-
-///<br/><br/>
-///Specifies the name of the field from the dataSource to bind with this column.
-///<br/>field-string	default-
-///<br/><br/>
-///Specifies the template string of the script element to enable column template for a column.
-///<br/>template-string	default-
-///<br/><br/>
-///Specifies the template ID of the script element to enable column template for a column.
-///<br/>templateID-string	default-
 ///<br/><br/>
 ///Specifies the template ID or the template string of the AngularJS script element to enable column template for a column.
 ///<br/>angularTemplate-string	default-
 ///<br/><br/>
-///Specifies the type of the editor control to be used to filter the rows.
-///<br/>filterEditType-ej.TreeGrid.EditingType|string	default-ej.TreeGrid.EditingType.String
-///<br/><br/>
-///Gets or sets a value to render either excel or menu filtering in TreeGrid column filtering.
-///<br/>filterType-ej.TreeGrid.FilterType|string	default-null
-///<br/><br/>
-///Header text of the column.
-///<br/>headerText-string	default-null
-///<br/><br/>
-///Gets or sets a value that indicates to display a column value as checkbox or string
-///<br/>displayAsCheckbox-boolean	default-false
-///<br/><br/>
-///Enables or disables the checkbox visibility in a column for checkbox selection.
-///<br/>showCheckbox-boolean	default-false
-///<br/><br/>
-///Controls the visibility of the column.
-///<br/>visible-boolean	default-true
-///<br/><br/>
-///Gets or sets a value for treegrid column width
-///<br/>width-number	default-
-///<br/><br/>
-///Specifies the header template value for the column header
-///<br/>headerTemplateID-string	default-
-///<br/><br/>
-///Specifies the display format of a column
-///<br/>format-any	default-null
-///<br/><br/>
-///Specifies whether the column is a template column
-///<br/>isTemplateColumn-boolean	default-false
-///<br/><br/>
-///Specifies the alignment of the column header text
-///<br/>headerTextAlign-ej.TextAlign|string	default-ej.TextAlign.Left
-///<br/><br/>
-///Specifies whether the column is frozen
-///<br/>isFrozen-boolean	default-false
-///<br/><br/>
-///Specifies the text alignment for the column
-///<br/>textAlign-ej.TextAlign|string	default-ej.TextAlign.Left
-///<br/><br/>
-///Enables or disables the ability to edit a row or cell.
-///<br/>allowEditing-boolean	default-false
+///Sets the clip mode for TreeGrid cell as ellipsis or clipped content(both header and content)
+///<br/>clipMode-ej.TreeGrid.ClipMode|string	default-ej.TreeGrid.ClipMode.Clip
 ///<br/><br/>
 ///Gets or sets an object to define a command column in TreeGrid.
 ///<br/>commands-Array&lt;any&gt;	default-[]
@@ -30786,35 +31164,89 @@ ejTreeGrid :function (options) {
 ///Gets or sets a value that define the command column buttons to be displayed.
 ///<br/>type-ej.TreeGrid.UnboundType|string	default-
 ///<br/><br/>
-///We can include or exclude particular column from column visibility list in column menu.
-///<br/>showInColumnChooser-boolean	default-true
+///Gets or sets a value that indicates to display a column value as checkbox or string
+///<br/>displayAsCheckbox-boolean	default-false
 ///<br/><br/>
-///Sets the clip mode for TreeGrid cell as ellipsis or clipped content(both header and content)
-///<br/>clipMode-ej.TreeGrid.ClipMode|string	default-ej.TreeGrid.ClipMode.Clip
+///To bind the dropdown data for TreeGrid column mapped with ejDropDownList
+///<br/>dropdownData-string	default-
 ///<br/><br/>
-///Sets the tooltip template for the specific column.
-///<br/>tooltip-string	default-null
+///To customize the ej controls defined in TreeGrid column with their native property.
+///<br/>editParams-any	default-
+///<br/><br/>
+///Gets or sets a template that displays a custom editor for editing the column values.
+///<br/>editTemplate-any	default-null
+///<br/><br/>
+///Specifies the edit type of the column.
+///<br/>editType-ej.TreeGrid.EditingType|string	default-ej.TreeGrid.EditingType.String
+///<br/><br/>
+///Specifies the name of the field from the dataSource to bind with this column.
+///<br/>field-string	default-
+///<br/><br/>
+///Specifies the type of the editor control to be used to filter the rows.
+///<br/>filterEditType-ej.TreeGrid.EditingType|string	default-ej.TreeGrid.EditingType.String
+///<br/><br/>
+///Gets or sets a value to render either excel or menu filtering in TreeGrid column filtering.
+///<br/>filterType-ej.TreeGrid.FilterType|string	default-null
+///<br/><br/>
+///Specifies the display format of a column
+///<br/>format-any	default-null
+///<br/><br/>
+///Specifies the header template value for the column header
+///<br/>headerTemplateID-string	default-
+///<br/><br/>
+///Header text of the column.
+///<br/>headerText-string	default-null
+///<br/><br/>
+///Specifies the alignment of the column header text
+///<br/>headerTextAlign-ej.TextAlign|string	default-ej.TextAlign.Left
 ///<br/><br/>
 ///Sets the tooltip template for the column header
 ///<br/>headerTooltip-string	default-null
 ///<br/><br/>
-///specifies the conditions for saving data to the database while adding or editing the fields.
-///<br/>validationRules-any	default-
+///Specifies whether the column is frozen
+///<br/>isFrozen-boolean	default-false
+///<br/><br/>
+///Specifies whether the column is a template column
+///<br/>isTemplateColumn-boolean	default-false
 ///<br/><br/>
 ///Gets or sets the priority value of the column. It is used to show/hide TreeGrid columns in responsive mode.
 ///<br/>priority-number	default--1
 ///<br/><br/>
-///To Specify the column fields to be displayed in the dialog while inserting a column using column menu.
-///<br/>columnDialogFields-Array&lt;any&gt;	default-[]
+///Enables or disables the checkbox visibility in a column for checkbox selection.
+///<br/>showCheckbox-boolean	default-false
 ///<br/><br/>
-///Enables or disables the ability to freeze/unfreeze the columns
-///<br/>allowFreezing-boolean	default-false
+///We can include or exclude particular column from column visibility list in column menu.
+///<br/>showInColumnChooser-boolean	default-true
+///<br/><br/>
+///Specifies the template string of the script element to enable column template for a column.
+///<br/>template-string	default-
+///<br/><br/>
+///Specifies the template ID of the script element to enable column template for a column.
+///<br/>templateID-string	default-
+///<br/><br/>
+///Specifies the text alignment for the column
+///<br/>textAlign-ej.TextAlign|string	default-ej.TextAlign.Left
+///<br/><br/>
+///Sets the tooltip template for the specific column.
+///<br/>tooltip-string	default-null
+///<br/><br/>
+///specifies the conditions for saving data to the database while adding or editing the fields.
+///<br/>validationRules-any	default-
+///<br/><br/>
+///Controls the visibility of the column.
+///<br/>visible-boolean	default-true
+///<br/><br/>
+///Gets or sets a value for TreeGrid column width
+///<br/>width-number	default-
+///<br/><br/>
+///Defines the common width for all the columns in TreeGrid
+///<br/>commonWidth-number	default-150
 ///<br/><br/>
 ///Options for displaying and customizing context menu items.
 ///<br/>contextMenuSettings-ContextMenuSettings	default-
 ///<br/><br/>
 ///Option for adding items to context menu.
-///<br/>contextMenuItems-Array&lt;any&gt;	default-[]
+///<br/>contextMenuItems-array&lt;ej.TreeGrid.ContextMenuItems|string&gt;	default-[]
 ///<br/><br/>
 ///Shows/hides the context menu.
 ///<br/>showContextMenu-boolean	default-false
@@ -30825,8 +31257,11 @@ ejTreeGrid :function (options) {
 ///Specifies hierarchical or self-referential data to populate the TreeGrid.
 ///<br/>dataSource-Array&lt;any&gt;	default-null
 ///<br/><br/>
-///Specifies whether to wrap the header text when it is overflown i.e., when it exceeds the header width.
-///<br/>headerTextOverflow-ej.TreeGrid.HeaderTextOverflow|string	default-ej.TreeGrid.HeaderTextOverflow.None
+///Specifies the template for details view
+///<br/>detailsTemplate-string	default-
+///<br/><br/>
+///Specifies the row height of the details view
+///<br/>detailsRowHeight-number	default-100
 ///<br/><br/>
 ///Options for displaying and customizing the tooltip. This tooltip will show the preview of the row that is being dragged.
 ///<br/>dragTooltip-DragTooltip	default-
@@ -30852,17 +31287,23 @@ ejTreeGrid :function (options) {
 ///Enables or disables the ability to edit a row or cell.
 ///<br/>allowEditing-boolean	default-false
 ///<br/><br/>
+///specifies the batch edit mode in TreeGrid.
+///<br/>batchEditSettings-any	default-
+///<br/><br/>
+///Specifies the batch edit mode whether it is cell, row or dialog.
+///<br/>editMode-ej.TreeGrid.BatchEditMode|string	default-ej.TreeGrid.BatchEditMode.Cell
+///<br/><br/>
 ///Specifies the mouse action whether single click or double click to begin the editing
 ///<br/>beginEditAction-ej.TreeGrid.BeginEditAction|string	default-ej.TreeGrid.BeginEditAction.DblClick
+///<br/><br/>
+///Specifies the template ID for the custom dialog.
+///<br/>dialogEditorTemplateID-string	default-null
 ///<br/><br/>
 ///specifies the edit mode in TreeGrid , "cellEditing" is for cell type editing and "rowEditing" is for entire row.
 ///<br/>editMode-ej.TreeGrid.EditMode|string	default-ej.TreeGrid.EditMode.CellEditing
 ///<br/><br/>
 ///Specifies the position where the new row has to be added.
-///<br/>rowPosition-ej.TreeGrid.RowPosition|string	default-top
-///<br/><br/>
-///Specifies the template ID for the custom dialog.
-///<br/>dialogEditorTemplateID-string	default-null
+///<br/>rowPosition-ej.TreeGrid.RowPosition|string	default-ej.TreeGrid.RowPosition.Top
 ///<br/><br/>
 ///Enable or disable the confirmation dialog while deleting the record.
 ///<br/>showDeleteConfirmDialog-boolean	default-false
@@ -30873,50 +31314,20 @@ ejTreeGrid :function (options) {
 ///Specifies whether to load all the rows in collapsed state when the TreeGrid is rendered for the first time.
 ///<br/>enableCollapseAll-boolean	default-false
 ///<br/><br/>
+///Gets or sets a value that indicates whether to enable load on demand approach, for rendering child records and page records.
+///<br/>enableLoadOnDemand-boolean	default-false
+///<br/><br/>
 ///Specifies whether to resize TreeGrid whenever window size changes.
 ///<br/>enableResize-boolean	default-false
 ///<br/><br/>
 ///Specifies whether to render only the visual elements that are visible in the UI. When you enable this property, it will reduce the loading time for loading large number of records.
 ///<br/>enableVirtualization-boolean	default-false
 ///<br/><br/>
-///Gets or sets a value that indicates whether to enable load on demand approach, for rendering child records and page records.
-///<br/>enableLoadOnDemand-boolean	default-false
-///<br/><br/>
-///Specifies the settings for column resize
-///<br/>columnResizeSettings-ColumnResizeSettings	default-
-///<br/><br/>
-///Specifies the mode for column resizing
-///<br/>columnResizeMode-ej.TreeGrid.ColumnResizeMode|string	default-ej.TreeGrid.ColumnResizeMode.Normal
-///<br/><br/>
-///Defines the common width for all the columns in TreeGrid
-///<br/>commonWidth-number	default-150
+///Specifies the mapping property path for the expand status of a record in data source.
+///<br/>expandStateMapping-string	default-
 ///<br/><br/>
 ///Options for filtering and customizing filter actions.
 ///<br/>filterSettings-FilterSettings	default-
-///<br/><br/>
-///Specifies the mode on which column filtering should start
-///<br/>filterBarMode-string	default-immediate
-///<br/><br/>
-///Specifies the type of column filtering.
-///<br/>filterType-ej.TreeGrid.FilterType|string	default-ej.TreeGrid.FilterType.FilterBar
-///<br/><br/>
-///Specifies the column collection for filtering the TreeGrid content on initial load
-///<br/>filteredColumns-Array&lt;any&gt;	default-[]
-///<br/><br/>
-///Specifies the value to be filtered in TreeGrid.
-///<br/>value-string	default-
-///<br/><br/>
-///Specifies the field where filtering has to be performed.
-///<br/>field-string	default-
-///<br/><br/>
-///Specifies the predicate(and/or) value to perform filtering.
-///<br/>predicate-string	default-
-///<br/><br/>
-///Specifies the filter condition to filtered column. See operator
-///<br/>operator-string	default-
-///<br/><br/>
-///Gets or sets a value that indicates the maximum number of filter choices that can be showed in the excel styled filter menu.
-///<br/>maxFilterChoice-number	default-1000
 ///<br/><br/>
 ///Gets or sets a value that indicates to perform the filter operation with case sensitive in excel styled filter menu mode.
 ///<br/>enableCaseSensitivity-boolean	default-false
@@ -30924,14 +31335,35 @@ ejTreeGrid :function (options) {
 ///Enables or disables the ability to filter the columns with empty, null and undefined values.
 ///<br/>enableComplexBlankFilter-boolean	default-true
 ///<br/><br/>
+///Specifies the mode on which column filtering should start
+///<br/>filterBarMode-string	default-immediate
+///<br/><br/>
 ///Specifies the mode of filtering to filter the record with or without hierarchy.
 ///<br/>filterHierarchyMode-ej.TreeGrid.FilterHierarchyMode|string	default-ej.TreeGrid.FilterHierarchyMode.Parent
 ///<br/><br/>
-///Specifies the localization information to customize the User Interface (UI) to support regional language and culture
-///<br/>locale-string	default-en-US
+///Specifies the type of column filtering.
+///<br/>filterType-ej.TreeGrid.FilterType|string	default-ej.TreeGrid.FilterType.FilterBar
 ///<br/><br/>
-///Enables or disables internal parsing of a row. When disabled this property, row will be displayed using the defined template without any internal event bindings.
-///<br/>parseRowTemplate-boolean	default-true
+///Specifies the column collection for filtering the TreeGrid content on initial load
+///<br/>filteredColumns-Array&lt;any&gt;	default-[]
+///<br/><br/>
+///Specifies the field where filtering has to be performed.
+///<br/>field-string	default-
+///<br/><br/>
+///Specifies the filter condition to filtered column. See operator
+///<br/>operator-string	default-
+///<br/><br/>
+///Specifies the predicate(and/or) value to perform filtering.
+///<br/>predicate-string	default-
+///<br/><br/>
+///Specifies the value to be filtered in TreeGrid.
+///<br/>value-string	default-
+///<br/><br/>
+///Gets or sets a value that indicates the maximum number of filter choices that can be showed in the excel styled filter menu.
+///<br/>maxFilterChoices-number	default-1000
+///<br/><br/>
+///Specifies whether to wrap the header text when it is overflown i.e., when it exceeds the header width.
+///<br/>headerTextOverflow-ej.TreeGrid.HeaderTextOverflow|string	default-ej.TreeGrid.HeaderTextOverflow.None
 ///<br/><br/>
 ///Specifies the name of the field in the dataSource, which contains the id of that row.
 ///<br/>idMapping-string	default-
@@ -30939,23 +31371,20 @@ ejTreeGrid :function (options) {
 ///Enables or disables the responsiveness of TreeGrid
 ///<br/>isResponsive-boolean	default-false
 ///<br/><br/>
-///Specifies the name of the field in the dataSource, which contains the parent's id. This is necessary to form a parent-child hierarchy, if the dataSource contains self-referential data.
-///<br/>parentIdMapping-string	default-
+///Specifies the localization information to customize the User Interface (UI) to support regional language and culture
+///<br/>locale-string	default-en-US
 ///<br/><br/>
 ///Specifies the options for customizing the pager.
 ///<br/>pageSettings-PageSettings	default-
+///<br/><br/>
+///Specifies the current page to display at load time.
+///<br/>currentPage-number	default-1
 ///<br/><br/>
 ///Using this property we can specify the number of pages should pager contains, according to this count TreeGrid height will be updated.
 ///<br/>pageCount-number	default-8
 ///<br/><br/>
 ///This specifies the number of rows to display in each page.
 ///<br/>pageSize-number	default-12
-///<br/><br/>
-///Get the value of records which is bound to TreeGrid. The totalRecordsCount value is calculated based on the datasource bound to TreeGrid.
-///<br/>totalRecordsCount-number	default-null
-///<br/><br/>
-///Specifies the current page to display at load time.
-///<br/>currentPage-number	default-1
 ///<br/><br/>
 ///Specifies the mode of record count in a page, whether it should count all the records or the root to count zero level parent records.
 ///<br/>pageSizeMode-ej.TreeGrid.PageSizeMode|string	default-ej.TreeGrid.PageSizeMode.All
@@ -30966,8 +31395,14 @@ ejTreeGrid :function (options) {
 ///Specifies the Custom template for Pager control.
 ///<br/>template-string	default-null
 ///<br/><br/>
-///Specifies the template for cell tooltip
-///<br/>cellTooltipTemplate-string	default-null
+///Get the value of records which is bound to TreeGrid. The totalRecordsCount value is calculated based on the datasource bound to TreeGrid.
+///<br/>totalRecordsCount-number	default-null
+///<br/><br/>
+///Specifies the name of the field in the dataSource, which contains the parent's id. This is necessary to form a parent-child hierarchy, if the dataSource contains self-referential data.
+///<br/>parentIdMapping-string	default-
+///<br/><br/>
+///Enables or disables internal parsing of a row. When disabled this property, row will be displayed using the defined template without any internal event bindings.
+///<br/>parseRowTemplate-boolean	default-true
 ///<br/><br/>
 ///Specifies ej.Query to select data from the dataSource. This property is applicable only when the dataSource is ej.DataManager.
 ///<br/>query-any	default-null
@@ -30978,26 +31413,38 @@ ejTreeGrid :function (options) {
 ///Specifies the id of the template to be applied for all the rows.
 ///<br/>rowTemplateID-string	default-
 ///<br/><br/>
-///Specifies the index of the selected row.
-///<br/>selectedRowIndex-number	default--1
+///Specifies the toolbar searching customizations.
+///<br/>searchSettings-SearchSettings	default-
+///<br/><br/>
+///Default Value
+///<br/>fields-Array&lt;any&gt;	default-[]
+///<br/><br/>
+///Default Value
+///<br/>ignoreCase-boolean	default-true
+///<br/><br/>
+///Default Value
+///<br/>key-string	default-
+///<br/><br/>
+///Specifies the operator for the search key words in toolbar searching.
+///<br/>operator-string	default-contains
+///<br/><br/>
+///Specifies the search mode of records in searching.
+///<br/>searchHierarchyMode-ej.TreeGrid.SearchHierarchyMode|string	default-ej.TreeGrid.SearchHierarchyMode.Parent
 ///<br/><br/>
 ///Specifies the selected cell information on rendering TreeGrid.
 ///<br/>selectedCellIndexes-Array&lt;SelectedCellIndexes&gt;	default-
 ///<br/><br/>
+///Specifies the cell index to be selected in the row.
+///<br/>cellIndex-number	default-
+///<br/><br/>
 ///Specifies the row index of the cell to be selected in TreeGrid control
 ///<br/>rowIndex-number	default-
 ///<br/><br/>
-///Specifies the cell index to be selected in the row.
-///<br/>cellIndex-number	default- 
+///Specifies the index of the selected row.
+///<br/>selectedRowIndex-number	default--1
 ///<br/><br/>
 ///Specifies the settings for row and cell selection.
 ///<br/>selectionSettings-SelectionSettings	default-
-///<br/><br/>
-///Specifies the type of selection whether to select row or cell.
-///<br/>selectionMode-ej.TreeGrid.SelectionMode|string	default-ej.TreeGrid.SelectionMode.Row
-///<br/><br/>
-///Specifies the type of selection whether single, multiple or checkbox.
-///<br/>selectionType-ej.TreeGrid.SelectionType|string	default-ej.TreeGrid.SelectionType.Single
 ///<br/><br/>
 ///Enables or disables the selection by hierarchy in check box selection
 ///<br/>enableHierarchySelection-boolean	default-true
@@ -31005,11 +31452,17 @@ ejTreeGrid :function (options) {
 ///Toggles the visibility of the checkbox in column header, using which all the check boxes can be selected or unselected.
 ///<br/>enableSelectAll-boolean	default-true
 ///<br/><br/>
-///Enables/disables the options for inserting , deleting and renaming  columns.
-///<br/>showColumnOptions-boolean	default-false
+///Specifies the type of selection whether to select row or cell.
+///<br/>selectionMode-ej.TreeGrid.SelectionMode|string	default-ej.TreeGrid.SelectionMode.Row
+///<br/><br/>
+///Specifies the type of selection whether single, multiple or checkbox.
+///<br/>selectionType-ej.TreeGrid.SelectionType|string	default-ej.TreeGrid.SelectionType.Single
 ///<br/><br/>
 ///Controls the visibility of the menu button, which is displayed on the column header. Clicking on this button will show a popup menu. When you choose Columns item from this popup, a list box with column names will be shown, from which you can select/deselect a column name to control the visibility of the respective columns.
 ///<br/>showColumnChooser-boolean	default-false
+///<br/><br/>
+///Enables/disables the options for inserting , deleting and renaming  columns.
+///<br/>showColumnOptions-boolean	default-false
 ///<br/><br/>
 ///Specifies the visibility of details view
 ///<br/>showDetailsRow-boolean	default-false
@@ -31017,16 +31470,43 @@ ejTreeGrid :function (options) {
 ///Specifies the visibility of the expander column which is used to expand or collapse the details view
 ///<br/>showDetailsRowInfoColumn-boolean	default-false
 ///<br/><br/>
-///Specifies the template for details view
-///<br/>detailsTemplate-string	default-
+///Specifies whether to show tooltip when mouse is hovered on the cell.
+///<br/>showGridCellTooltip-boolean	default-true
 ///<br/><br/>
-///Specifies the row height of the details view
-///<br/>detailsRowHeight-number	default-100
+///Specifies whether to show tooltip for the cells, which has expander button.
+///<br/>showGridExpandCellTooltip-boolean	default-true
 ///<br/><br/>
 ///Gets or sets a value that indicates stacked header should be shown on TreeGrid layout when the property â€œstackedHeaderRowsâ€ is set.
 ///<br/>showStackedHeader-boolean	default-false
 ///<br/><br/>
-///Gets or sets an object that indicates to managing the collection of stacked header rows for the treegrid.
+///Specifies the visibility of summary row
+///<br/>showSummaryRow-boolean	default-false
+///<br/><br/>
+///Specifies the visibility of total summary row for the corresponding summary column
+///<br/>showTotalSummary-boolean	default-false
+///<br/><br/>
+///Options for setting width and height for TreeGrid.
+///<br/>sizeSettings-SizeSettings	default-
+///<br/><br/>
+///Height of the TreeGrid.
+///<br/>height-string	default-450px
+///<br/><br/>
+///Width of the TreeGrid.
+///<br/>width-string	default-100%
+///<br/><br/>
+///Options for sorting the rows.
+///<br/>sortSettings-SortSettings	default-
+///<br/><br/>
+///Option to add columns based on which the rows have to be sorted recursively.
+///<br/>sortedColumns-Array&lt;any&gt;	default-[]
+///<br/><br/>
+///Specifies the sort direction in TreeGrid
+///<br/>direction-string	default-
+///<br/><br/>
+///Specifies the field to be sorted in TreeGrid
+///<br/>field-string	default-
+///<br/><br/>
+///Gets or sets an object that indicates to managing the collection of stacked header rows for the TreeGrid.
 ///<br/>stackedHeaderRows-Array&lt;StackedHeaderRows&gt;	default-[]
 ///<br/><br/>
 ///Gets or sets a value that indicates whether to add stacked header columns into the stacked header rows
@@ -31047,38 +31527,14 @@ ejTreeGrid :function (options) {
 ///Sets the template for tooltip for the Grid stackedHeaderColumns.
 ///<br/>tooltip-string	default-null
 ///<br/><br/>
-///Specifies the toolbar searching customizations.
-///<br/>searchSettings-SearchSettings	default-
-///<br/><br/>
-///Default Value
-///<br/>fields-Array&lt;any&gt;	default-[]
-///<br/><br/>
-///Default Value
-///<br/>key-string	default-
-///<br/><br/>
-///Specifies the operator for the search key words in toolbar searching.
-///<br/>operator-string	default-contains
-///<br/><br/>
-///Default Value
-///<br/>ignoreCase-boolean	default-true
-///<br/><br/>
-///Specifies the visibility of summary row
-///<br/>showSummaryRow-boolean	default-false
-///<br/><br/>
-///Specifies the visibility of total summary row for the corresponding summary column
-///<br/>showTotalSummary-boolean	default-false
-///<br/><br/>
 ///Specifies the summary row collection object to be displayed
 ///<br/>summaryRows-Array&lt;SummaryRows&gt;	default-[]
-///<br/><br/>
-///Specifies the title for summary row collection in TreeGrid
-///<br/>title-string	default-
 ///<br/><br/>
 ///Specifies the summary columns in the summary rows.
 ///<br/>summaryColumns-Array&lt;any&gt;	default-
 ///<br/><br/>
-///Specifies the summary type to perform calculations in a corresponding summary column. See summaryType.
-///<br/>summaryType-ej.TreeGrid.SummaryType|string	default-
+///Specifies the custom summary calculate function or text.
+///<br/>customSummaryValue-string	default-
 ///<br/><br/>
 ///Specifies summary column used to perform the summary calculation.
 ///<br/>dataMember-string	default-
@@ -31086,50 +31542,23 @@ ejTreeGrid :function (options) {
 ///Specifies the required column to display the summary.
 ///<br/>displayColumn-string	default-
 ///<br/><br/>
+///Specifies the format to be applied on the summary column value.
+///<br/>format-string	default-
+///<br/><br/>
 ///Specifies the text to be displayed before the summary column value.
 ///<br/>prefix-string	default-
 ///<br/><br/>
 ///Specifies the text to be displayed after the summary column value.
 ///<br/>suffix-string	default-
 ///<br/><br/>
-///Specifies the format to be applied on the summary column value.
-///<br/>format-string	default-
+///Specifies the summary type to perform calculations in a corresponding summary column. See summaryType.
+///<br/>summaryType-ej.TreeGrid.SummaryType|string	default-
 ///<br/><br/>
-///Specifies whether to show tooltip when mouse is hovered on the cell.
-///<br/>showGridCellTooltip-boolean	default-true
-///<br/><br/>
-///Specifies whether to show tooltip for the cells, which has expander button.
-///<br/>showGridExpandCellTooltip-boolean	default-true
-///<br/><br/>
-///Options for setting width and height for TreeGrid.
-///<br/>sizeSettings-SizeSettings	default-
-///<br/><br/>
-///Height of the TreeGrid.
-///<br/>height-string	default-null
-///<br/><br/>
-///Width of the TreeGrid.
-///<br/>width-string	default-null
-///<br/><br/>
-///Options for sorting the rows.
-///<br/>sortSettings-SortSettings	default-
-///<br/><br/>
-///Option to add columns based on which the rows have to be sorted recursively.
-///<br/>sortedColumns-Array&lt;any&gt;	default-[]
-///<br/><br/>
-///Specifies the field to be sorted in TreeGrid
-///<br/>field-string	default-
-///<br/><br/>
-///Specifies the sort direction in TreeGrid
-///<br/>direction-string	default-
+///Specifies the title for summary row collection in TreeGrid
+///<br/>title-string	default-
 ///<br/><br/>
 ///Options for displaying and customizing the toolbar items.
 ///<br/>toolbarSettings-ToolbarSettings	default-
-///<br/><br/>
-///Shows/hides the toolbar.
-///<br/>showToolbar-boolean	default-false
-///<br/><br/>
-///Specifies the list of toolbar items to be rendered in TreeGrid toolbar
-///<br/>toolbarItems-Array&lt;any&gt;	default-[]
 ///<br/><br/>
 ///Allows the user to insert custom toolbar items.
 ///<br/>customToolbarItems-Array&lt;any&gt;	default-
@@ -31142,6 +31571,15 @@ ejTreeGrid :function (options) {
 ///<br/><br/>
 ///Allows the user to display custom tooltip text for TreeGrid custom toolbar items.
 ///<br/>tooltipText-string	default-
+///<br/><br/>
+///Shows/hides the toolbar.
+///<br/>showToolbar-boolean	default-false
+///<br/><br/>
+///Specifies the list of toolbar items to be rendered in TreeGrid toolbar
+///<br/>toolbarItems-array&lt;ej.TreeGrid.ToolbarItems|string&gt;	default-[]
+///<br/><br/>
+///Specifies the height of footer summary container.
+///<br/>totalSummaryHeight-number	default-90
 ///<br/><br/>
 ///Specifies the index of the column that needs to have the expander button. By default, cells in the first column contain the expander button.
 ///<br/>treeColumnIndex-number	default-0
@@ -31169,6 +31607,12 @@ refresh:function(){
 /// <signature>
 /// <summary>
 /// Method to reload treemap with updated values.
+/// </summary>
+},
+drillDown:function(){
+/// <signature>
+/// <summary>
+/// Method to drilldown the treemap.
 /// </summary>
 },
 });
@@ -31248,6 +31692,12 @@ ejTreeMap :function (options) {
 ///<br/><br/>
 ///Enable/Disable the drillDown for treemap
 ///<br/>enableDrillDown-boolean	default-false
+///<br/><br/>
+///Specifies to drill the particular data of the treemap.
+///<br/>drillDownValue-string	default-null
+///<br/><br/>
+///Specifies to render particular level of the treemap.
+///<br/>drillDownLevel-number	default-0
 ///<br/><br/>
 ///Controls whether Treemap has to be responsive while resizing the window.
 ///<br/>isResponsive-boolean	default-true
@@ -31472,7 +31922,7 @@ var wrapper=function(){
 var instance = new original();
 intellisense.annotate(instance, {
 
-addNode:function(newNodeText, target){
+addNode:function(newNodeText, target, preventTargetExpand){
 /// <signature>
 /// <summary>
 /// To add a Node or collection of nodes in TreeView. If target tree node is specified, then the given nodes are added as child of target tree node, otherwise nodes are added in TreeView.
@@ -31485,8 +31935,14 @@ addNode:function(newNodeText, target){
 /// </summary>
 /// <param name="target"	type="string|any">ID of TreeView node/object of TreeView node</param>
 /// </signature>
+/// <signature>
+/// <summary>
+/// To add a Node or collection of nodes in TreeView. If target tree node is specified, then the given nodes are added as child of target tree node, otherwise nodes are added in TreeView.
+/// </summary>
+/// <param name="preventTargetExpand"	type="boolean">Parent node will be prevented from auto expanding</param>
+/// </signature>
 },
-addNodes:function(collection, target){
+addNodes:function(collection, target, preventTargetExpand){
 /// <signature>
 /// <summary>
 /// To add a collection of nodes in TreeView. If target tree node is specified, then the given nodes are added as child of target tree node, otherwise nodes are added in TreeView.
@@ -31498,6 +31954,12 @@ addNodes:function(collection, target){
 /// To add a collection of nodes in TreeView. If target tree node is specified, then the given nodes are added as child of target tree node, otherwise nodes are added in TreeView.
 /// </summary>
 /// <param name="target"	type="string|any">ID of TreeView node/object of TreeView node</param>
+/// </signature>
+/// <signature>
+/// <summary>
+/// To add a collection of nodes in TreeView. If target tree node is specified, then the given nodes are added as child of target tree node, otherwise nodes are added in TreeView.
+/// </summary>
+/// <param name="preventTargetExpand"	type="boolean">Parent node will be prevented from auto expanding</param>
 /// </signature>
 },
 checkAll:function(){

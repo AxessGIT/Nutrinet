@@ -43,6 +43,9 @@ namespace NutrinetSync
 
             bundles.Add(new StyleBundle("~/bundles/funciones").Include(
                       "~/Scripts/Funciones.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/transfiere").Include(
+                      "~/Scripts/Transfiere.js"));
         }
     }
 }

@@ -1,0 +1,15 @@
+﻿@model Nullable<DateTime>
+
+@{
+    DateTime dt = DateTime.Now;
+    if (Model != null)
+    {
+        dt = (System.DateTime)Model;
+
+    }
+    @*@Html.TextBox("", String.Format("{0:d}", dt.ToShortDateString()),
+        new { @class = "form-control datefield", type = "string" })*@
+    @*@Html.EJ().DatePickerFor(model => model.fechanac, 
+    new { htmlAttributes = new { @class = "form-control" } }).DateFormat("yyyy/MM/dd").Locale("es-MX").WatermarkText("Ingrese la Fecha").ButtonText("Hoy")*@
+    @Html.EJ().DatePicker("", ).DateFormat("yyyy/MM/dd").Locale("es-MX").WatermarkText("Ingrese la Fecha").ButtonText("Hoy")
+}

@@ -41,7 +41,8 @@
           <Property Name="nombremadre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ultimaconsulta" Type="date" Nullable="false" />
           <Property Name="peso" Type="numeric" Precision="6" Scale="2" Nullable="false" />
-          <Property Name="talla" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="talla" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="nivelactividad" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <Association Name="historias_fk">
           <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
@@ -97,6 +98,7 @@
           <Property Name="peso" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
           <Property Name="talla" Type="Decimal" Precision="3" Scale="1" Nullable="false" />
           <NavigationProperty Name="historias" Relationship="nutrinetModel.historias_fk" FromRole="paciente" ToRole="historias" />
+          <Property Name="nivelactividad" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="nutrinetEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="paciente" EntityType="Self.paciente" />
@@ -136,6 +138,7 @@
           <EntitySetMapping Name="paciente">
             <EntityTypeMapping TypeName="nutrinetModel.paciente">
               <MappingFragment StoreEntitySet="paciente">
+                <ScalarProperty Name="nivelactividad" ColumnName="nivelactividad" />
                 <ScalarProperty Name="pacienteid" ColumnName="pacienteid" />
                 <ScalarProperty Name="nombres" ColumnName="nombres" />
                 <ScalarProperty Name="apellidop" ColumnName="apellidop" />

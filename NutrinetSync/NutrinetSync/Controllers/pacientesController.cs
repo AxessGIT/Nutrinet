@@ -10,9 +10,23 @@ using NutrinetSync.ModeloSys;
 
 namespace NutrinetSync.Controllers
 {
+    public class ActividadesLista
+    {
+        public string id { get; set; }
+        public string act { get; set; }
+        public static List<ActividadesLista> GetActividadLista()
+        {
+            List<ActividadesLista> actividad = new List<ActividadesLista>();
+            actividad.Add(new ActividadesLista { id = "Sedentario", act = "Sedentario" });
+            actividad.Add(new ActividadesLista { id = "Activo", act = "Activo" });
+            actividad.Add(new ActividadesLista { id = "Muy Activo", act = "Muy Activo" });
+            return actividad;
+        }
+    }
+
     public class pacientesController : Controller
     {
-        private nutrinetEntities db = new nutrinetEntities();
+        private nutrinetEntities db = new nutrinetEntities(); 
 
         // GET: pacientes
         public ActionResult Index()
@@ -87,6 +101,9 @@ namespace NutrinetSync.Controllers
         // GET: pacientes/Informacion
         public ActionResult Informacion(long? id)
         {
+            //Se manda lista de actividades
+            ViewBag.datasource = ActividadesLista.GetActividadLista();
+
             if (id == null)
             {
                 //Se notifica que es alta
@@ -103,7 +120,7 @@ namespace NutrinetSync.Controllers
 
             //Se notifica que es modificacion
             ViewBag.Message = "modificacion";
-            ViewBag.id = id;
+            ViewBag.id = id;            
 
             return View(paciente);
         }
@@ -111,7 +128,7 @@ namespace NutrinetSync.Controllers
         //POST: pacientes/Informacion/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Informacion([Bind(Include = "pacienteid,nombres,apellidop,apellidom,fechanac,sexo,estadocivil,telefonos,correo,referente,calle,numext,numint,colonia,localidad,municipio,ciudad,ciudadorigen,estado,pais,nombrepadre,nombremadre,ultimaconsulta,peso,talla")] paciente paciente)
+        public ActionResult Informacion([Bind(Include = "pacienteid,nombres,apellidop,apellidom,fechanac,sexo,estadocivil,telefonos,correo,referente,calle,numext,numint,colonia,localidad,municipio,ciudad,ciudadorigen,estado,pais,nombrepadre,nombremadre,ultimaconsulta,peso,talla,nivelactividad")] paciente paciente)
         {
             if (ModelState.IsValid)
             {

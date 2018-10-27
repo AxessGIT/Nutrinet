@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="nutrinetModel.Store" Provider="Npgsql" ProviderManifestToken="10.4" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="historias">
+    <Key>
+      <PropertyRef Name="historiaid" />
+    </Key>
+    <Property Name="historiaid" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pacienteid" Type="int8" Nullable="false" />
+    <Property Name="historia" Type="varchar" MaxLength="8000" Nullable="false" />
+  </EntityType>
+  <EntityType Name="paciente">
+    <Key>
+      <PropertyRef Name="pacienteid" />
+    </Key>
+    <Property Name="pacienteid" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombres" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellidop" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellidom" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="fechanac" Type="date" Nullable="false" />
+    <Property Name="sexo" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="estadocivil" Type="int8" Nullable="false" />
+    <Property Name="telefonos" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="correo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="referente" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="calle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="numext" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="numint" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="colonia" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="localidad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="municipio" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ciudad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ciudadorigen" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pais" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="nombrepadre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nombremadre" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ultimaconsulta" Type="date" Nullable="false" />
+    <Property Name="peso" Type="numeric" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="talla" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+    <Property Name="nivelactividad" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <Association Name="historias_fk">
+    <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+    <End Role="historias" Type="Self.historias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="paciente">
+        <PropertyRef Name="pacienteid" />
+      </Principal>
+      <Dependent Role="historias">
+        <PropertyRef Name="pacienteid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="nutrinetModelStoreContainer">
+    <EntitySet Name="historias" EntityType="Self.historias" Schema="public" store:Type="Tables" />
+    <EntitySet Name="paciente" EntityType="Self.paciente" Schema="public" store:Type="Tables" />
+    <AssociationSet Name="historias_fk" Association="Self.historias_fk">
+      <End Role="paciente" EntitySet="paciente" />
+      <End Role="historias" EntitySet="historias" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

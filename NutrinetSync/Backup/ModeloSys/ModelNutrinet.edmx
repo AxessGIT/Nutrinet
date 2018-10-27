@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="nutrinetModel.Store" Provider="Npgsql" ProviderManifestToken="10.4" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="historias">
+          <Key>
+            <PropertyRef Name="historiaid" />
+          </Key>
+          <Property Name="historiaid" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pacienteid" Type="int8" Nullable="false" />
+          <Property Name="historia" Type="varchar" MaxLength="8000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="paciente">
+          <Key>
+            <PropertyRef Name="pacienteid" />
+          </Key>
+          <Property Name="pacienteid" Type="int8" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidop" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fechanac" Type="date" Nullable="false" />
+          <Property Name="sexo" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="estadocivil" Type="int8" Nullable="false" />
+          <Property Name="telefonos" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="correo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="referente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="calle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="numext" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="numint" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="colonia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="localidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="municipio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ciudad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ciudadorigen" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pais" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="nombrepadre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombremadre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ultimaconsulta" Type="date" Nullable="false" />
+          <Property Name="peso" Type="numeric" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="talla" Type="numeric" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="nivelactividad" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="historias_fk">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="historias" Type="Self.historias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="pacienteid" />
+            </Principal>
+            <Dependent Role="historias">
+              <PropertyRef Name="pacienteid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="nutrinetModelStoreContainer">
+          <EntitySet Name="historias" EntityType="Self.historias" Schema="public" store:Type="Tables" />
+          <EntitySet Name="paciente" EntityType="Self.paciente" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="historias_fk" Association="Self.historias_fk">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="historias" EntitySet="historias" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="nutrinetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="paciente">
+          <Key>
+            <PropertyRef Name="pacienteid" />
+          </Key>
+          <Property Name="pacienteid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidop" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fechanac" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="estadocivil" Type="Int64" Nullable="false" />
+          <Property Name="telefonos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="referente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="numext" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="numint" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="colonia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="localidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="municipio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ciudadorigen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pais" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombrepadre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombremadre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ultimaconsulta" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="peso" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="talla" Type="Decimal" Precision="3" Scale="1" Nullable="false" />
+          <NavigationProperty Name="historias" Relationship="nutrinetModel.historias_fk" FromRole="paciente" ToRole="historias" />
+          <Property Name="nivelactividad" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="nutrinetEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="paciente" EntityType="Self.paciente" />
+          <EntitySet Name="historias" EntityType="nutrinetModel.historias" />
+          <AssociationSet Name="historias_fk" Association="nutrinetModel.historias_fk">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="historias" EntitySet="historias" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="historias">
+          <Key>
+            <PropertyRef Name="historiaid" />
+          </Key>
+          <Property Name="historiaid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pacienteid" Type="Int64" Nullable="false" />
+          <Property Name="historia" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="paciente" Relationship="nutrinetModel.historias_fk" FromRole="historias" ToRole="paciente" />
+        </EntityType>
+        <Association Name="historias_fk">
+          <End Type="nutrinetModel.paciente" Role="paciente" Multiplicity="1" />
+          <End Type="nutrinetModel.historias" Role="historias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="pacienteid" />
+            </Principal>
+            <Dependent Role="historias">
+              <PropertyRef Name="pacienteid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="nutrinetModelStoreContainer" CdmEntityContainer="nutrinetEntities">
+          <EntitySetMapping Name="paciente">
+            <EntityTypeMapping TypeName="nutrinetModel.paciente">
+              <MappingFragment StoreEntitySet="paciente">
+                <ScalarProperty Name="nivelactividad" ColumnName="nivelactividad" />
+                <ScalarProperty Name="pacienteid" ColumnName="pacienteid" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidop" ColumnName="apellidop" />
+                <ScalarProperty Name="apellidom" ColumnName="apellidom" />
+                <ScalarProperty Name="fechanac" ColumnName="fechanac" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="estadocivil" ColumnName="estadocivil" />
+                <ScalarProperty Name="telefonos" ColumnName="telefonos" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="referente" ColumnName="referente" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="numext" ColumnName="numext" />
+                <ScalarProperty Name="numint" ColumnName="numint" />
+                <ScalarProperty Name="colonia" ColumnName="colonia" />
+                <ScalarProperty Name="localidad" ColumnName="localidad" />
+                <ScalarProperty Name="municipio" ColumnName="municipio" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="ciudadorigen" ColumnName="ciudadorigen" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="nombrepadre" ColumnName="nombrepadre" />
+                <ScalarProperty Name="nombremadre" ColumnName="nombremadre" />
+                <ScalarProperty Name="ultimaconsulta" ColumnName="ultimaconsulta" />
+                <ScalarProperty Name="peso" ColumnName="peso" />
+                <ScalarProperty Name="talla" ColumnName="talla" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="historias">
+            <EntityTypeMapping TypeName="nutrinetModel.historias">
+              <MappingFragment StoreEntitySet="historias">
+                <ScalarProperty Name="historia" ColumnName="historia" />
+                <ScalarProperty Name="pacienteid" ColumnName="pacienteid" />
+                <ScalarProperty Name="historiaid" ColumnName="historiaid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

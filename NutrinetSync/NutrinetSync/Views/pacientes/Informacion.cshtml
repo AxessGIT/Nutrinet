@@ -1,7 +1,7 @@
-﻿@model NutrinetSync.ModeloSys.paciente
+@model NutrinetSync.ModeloSys.paciente
 
 @{
-    ViewBag.Title = "Informacón del Paciente";
+    ViewBag.Title = "Información del Paciente";
 }
 
 <h2>Información del Paciente</h2>
@@ -326,11 +326,24 @@
             <div class="form-group">
                 @*@Html.LabelFor(model => model.talla, htmlAttributes: new { @class = "control-label col-md-4" })*@
                 <div class="control-label col-md-4">
-                    Talla
+                    Talla (Centimetros)
                 </div>
                 <div class="col-md-8">
                     @Html.EditorFor(model => model.talla, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.talla, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.talla, htmlAttributes: new { @class = "control-label col-md-4" })*@
+                <div class="control-label col-md-4">
+                    Nivel de Actividad
+                </div>
+                <div class="col-md-8">
+                    @Html.EJ().DropDownListFor(model => model.nivelactividad, new { htmlAttributes = new { @class = "form-control" } }).Datasource((IEnumerable<NutrinetSync.Controllers.ActividadesLista>)ViewBag.datasource).DropDownListFields(df => df.ID("id").Text("act").Value("act"))
+                    @Html.ValidationMessageFor(model => model.nivelactividad, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -345,7 +358,7 @@
                 }
             </div>
         </div>
-        
+
     </div>
 </div>
 }

@@ -1,0 +1,8 @@
+
+
+Date:2018-10-26 09:54:00,673
+Thread:[1]
+Level:ERROR
+Logger:Syncfusion.Web.Extension.SyncfusionPackage                         [(null)]
+Message:System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en Syncfusion.Web.Extension.SyncfusionPackage.queryStatusMenuCommand_BeforeQueryStatus(Object sender, EventArgs e) en D:\Work\SVN\16.3.0.1\Utilities\MVC\VSExtension\ConversionProject\Syncfusion.ASP.NET.MVC.Extension\SyncfusionMVCPackage.cs:línea 381

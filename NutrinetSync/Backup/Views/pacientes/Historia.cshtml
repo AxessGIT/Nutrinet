@@ -1,0 +1,141 @@
+﻿@model NutrinetSync.ModeloSys.historias
+
+@{
+    ViewBag.Title = "Historia del Paciente";
+}
+
+<h2>Historia del Paciente</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.historiaid)
+        @Html.HiddenFor(model => model.paciente.pacienteid)
+
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        Nombre del Paciente
+                    </div>
+                    <div class="col-md-8">
+                        @ViewBag.NombreCompleto
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-1">
+                        Edad
+                    </div>
+                    <div class="col-md-5">
+                        @ViewBag.Edad
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-1">
+                        Sexo
+                    </div>
+                    <div class="col-md-5">
+                        @ViewBag.Sexo
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* Fecha (Hoy) *@
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        Fecha de Consulta
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EJ().DatePickerFor(model => model.paciente.ultimaconsulta, new { htmlAttributes = new { @class = "form-control" } }).Value(Model.paciente.ultimaconsulta).DateFormat("yyyy/MM/dd").Locale("es-MX").WatermarkText("Ingrese la Fecha").ButtonText("Hoy").ClientSideEvents(e => e.Change("onChange"))
+                        <input class="form-control" id="txtFecha" value="@(ViewBag.FechaActual ?? String.Empty)" type="hidden" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* Peso (Kilogramos) *@
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        Peso (Kilogramos)
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.paciente.peso, new { htmlAttributes = new { @class = "form-control", id = "txtPeso" } })
+                        @Html.ValidationMessageFor(model => model.paciente.peso, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* Talla (Centimetros) *@
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        Talla (Centimetros)
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.paciente.talla, new { htmlAttributes = new { @class = "form-control", id = "txtTalla" } })
+                        @Html.ValidationMessageFor(model => model.paciente.talla, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <button id="btnAgregar" onclick="AgregaDatos()" class="btn btn-primary" type="button">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-10">
+            <div class="form-group">
+                <p>Notas</p>
+                @*@Html.EditorFor(model => model.historia, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.TextAreaFor(model => model.historia, new { @class = "form-control", @cols = 100, @rows = 10, id = "txtHistoria" })
+                @Html.ValidationMessageFor(model => model.historia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<br />
+
+<div>
+    @Html.ActionLink("< Volver al Paciente", "Informacion", new { id = Model.pacienteid })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/funciones")
+}
