@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="nutrinetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="paciente">
+    <Key>
+      <PropertyRef Name="pacienteid" />
+    </Key>
+    <Property Name="pacienteid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="apellidop" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="apellidom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fechanac" Type="DateTime" Precision="0" Nullable="false" />
+    <Property Name="sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estadocivil" Type="Int64" Nullable="false" />
+    <Property Name="telefonos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="correo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="referente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="numext" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="numint" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="colonia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="localidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="municipio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ciudadorigen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pais" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nombrepadre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nombremadre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ultimaconsulta" Type="DateTime" Precision="0" Nullable="false" />
+    <Property Name="peso" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="talla" Type="Decimal" Precision="3" Scale="1" Nullable="false" />
+    <NavigationProperty Name="historias" Relationship="nutrinetModel.historias_fk" FromRole="paciente" ToRole="historias" />
+    <Property Name="nivelactividad" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="nutrinetEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="paciente" EntityType="Self.paciente" />
+    <EntitySet Name="historias" EntityType="nutrinetModel.historias" />
+    <AssociationSet Name="historias_fk" Association="nutrinetModel.historias_fk">
+      <End Role="paciente" EntitySet="paciente" />
+      <End Role="historias" EntitySet="historias" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="historias">
+    <Key>
+      <PropertyRef Name="historiaid" />
+    </Key>
+    <Property Name="historiaid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pacienteid" Type="Int64" Nullable="false" />
+    <Property Name="historia" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="paciente" Relationship="nutrinetModel.historias_fk" FromRole="historias" ToRole="paciente" />
+  </EntityType>
+  <Association Name="historias_fk">
+    <End Type="nutrinetModel.paciente" Role="paciente" Multiplicity="1" />
+    <End Type="nutrinetModel.historias" Role="historias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="paciente">
+        <PropertyRef Name="pacienteid" />
+      </Principal>
+      <Dependent Role="historias">
+        <PropertyRef Name="pacienteid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

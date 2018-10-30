@@ -386,3 +386,4 @@ C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.csproj.CoreCom
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.csproj.CopyComplete
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.pdb
+C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.csprojAssemblyReference.cache

@@ -1,0 +1,49 @@
+@model IEnumerable<NutrinetSync.ModeloSys.paciente>
+
+@{
+    ViewBag.Title = "Pacientes";
+}
+
+<h2>Listado de Pacientes</h2>
+
+<p>
+    @*@Html.ActionLink("Registrar Nuevo [+]", "Create")*@
+    @Html.ActionLink("Registrar Nuevo [+]", "Informacion")
+</p>
+<table class="table">
+    <tr>
+        <th>Nombre(s)</th>
+        <th>Apellido Paterno</th>
+        <th>Apellido Materno</th>
+        <th>Telefono(s)</th>
+        <th>Correo</th>        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombres)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellidop)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellidom)
+        </td>      
+        <td>
+            @Html.DisplayFor(modelItem => item.telefonos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.correo)
+        </td>        
+        <td>
+            @*@Html.ActionLink("Editar", "Edit", new { id=item.pacienteid }) |*@
+            @Html.ActionLink("Editar", "Informacion", new { id = item.pacienteid }) |
+            @Html.ActionLink("Detalles", "Details", new { id = item.pacienteid }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.pacienteid })
+        </td>
+    </tr>
+}
+
+</table>

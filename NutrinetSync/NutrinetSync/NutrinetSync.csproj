@@ -671,6 +671,7 @@
     <Content Include="Content\ej\web\common-images\reportviewer\ej-reportviewericons.ttf" />
     <Content Include="Content\ej\web\common-images\reportviewer\ej-reportviewericons.woff" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ej\ej.globalize.min.js" />
     <Content Include="Scripts\ej\ej.unobtrusive.min.js" />
