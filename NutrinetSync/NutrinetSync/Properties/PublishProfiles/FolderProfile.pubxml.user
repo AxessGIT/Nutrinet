@@ -79,10 +79,10 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>09/08/2018 15:28:50</publishTime>
     </File>
     <File Include="bin/NutrinetSync.dll">
-      <publishTime>10/29/2018 12:17:15</publishTime>
+      <publishTime>11/01/2018 13:43:30</publishTime>
     </File>
     <File Include="bin/NutrinetSync.pdb">
-      <publishTime>10/29/2018 12:17:15</publishTime>
+      <publishTime>11/01/2018 13:43:30</publishTime>
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>10/26/2018 09:43:38</publishTime>
@@ -1737,6 +1737,9 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
     <File Include="Scripts/bootstrap.min.js">
       <publishTime>10/26/2018 09:43:37</publishTime>
     </File>
+    <File Include="Scripts/cultura/syncESP.js">
+      <publishTime>11/01/2018 13:03:00</publishTime>
+    </File>
     <File Include="Scripts/ej/ej.globalize.min.js">
       <publishTime>09/20/2018 02:42:32</publishTime>
     </File>
@@ -1870,7 +1873,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/26/2018 09:43:37</publishTime>
     </File>
     <File Include="Scripts/Transfiere.js">
-      <publishTime>10/27/2018 11:23:35</publishTime>
+      <publishTime>11/01/2018 12:56:24</publishTime>
     </File>
     <File Include="Scripts/_references.js">
       <publishTime>10/26/2018 09:43:37</publishTime>
@@ -1957,13 +1960,13 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/26/2018 09:53:53</publishTime>
     </File>
     <File Include="Views/pacientes/Historia.cshtml">
-      <publishTime>10/27/2018 12:49:37</publishTime>
+      <publishTime>10/30/2018 13:45:50</publishTime>
     </File>
     <File Include="Views/pacientes/Index.cshtml">
-      <publishTime>10/26/2018 09:53:53</publishTime>
+      <publishTime>11/01/2018 13:37:52</publishTime>
     </File>
     <File Include="Views/pacientes/Informacion.cshtml">
-      <publishTime>10/26/2018 16:12:36</publishTime>
+      <publishTime>10/31/2018 10:06:49</publishTime>
     </File>
     <File Include="Views/Shared/EditorTemplates/DateTime.cshtml">
       <publishTime>10/26/2018 09:53:53</publishTime>
@@ -1975,7 +1978,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/26/2018 09:53:53</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>10/26/2018 10:22:03</publishTime>
+      <publishTime>11/01/2018 13:05:42</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>10/26/2018 09:53:53</publishTime>
@@ -1987,7 +1990,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/26/2018 09:53:53</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/29/2018 12:17:16</publishTime>
+      <publishTime>10/31/2018 11:01:25</publishTime>
     </File>
   </ItemGroup>
 </Project>

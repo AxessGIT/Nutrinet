@@ -10,40 +10,84 @@
     @*@Html.ActionLink("Registrar Nuevo [+]", "Create")*@
     @Html.ActionLink("Registrar Nuevo [+]", "Informacion")
 </p>
-<table class="table">
-    <tr>
-        <th>Nombre(s)</th>
-        <th>Apellido Paterno</th>
-        <th>Apellido Materno</th>
-        <th>Telefono(s)</th>
-        <th>Correo</th>        
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombres)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellidop)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellidom)
-        </td>      
-        <td>
-            @Html.DisplayFor(modelItem => item.telefonos)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.correo)
-        </td>        
-        <td>
-            @*@Html.ActionLink("Editar", "Edit", new { id=item.pacienteid }) |*@
-            @Html.ActionLink("Editar", "Informacion", new { id = item.pacienteid }) |
-            @Html.ActionLink("Detalles", "Details", new { id = item.pacienteid }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id = item.pacienteid })
-        </td>
-    </tr>
-}
+@(Html.EJ().Grid<object>("FlatGrid")
+    .Datasource((IEnumerable<object>)ViewBag.data)
+    .AllowPaging()    
+    .AllowFiltering()
+    .AllowTextWrap()
+    .EnableRowHover(true)
+    .EnableResponsiveRow(true)
+    .IsResponsive(true)
+    .FilterSettings(d => d.FilterType(FilterType.Excel))
+    .Locale("es-ES")
+    .PageSettings(page => page.PageSize(5))
+    .SelectionType(SelectionType.Single)
+    .SelectionSettings(select => { select.SelectionMode(mode => { mode.AddMode(SelectionMode.Row); }); })    
+    
+    .Columns(col =>
+    {
+        col.Field("nombre").HeaderText("Nombre(s)").Width(30).Add();
 
-</table>
+        //col.Field("apellidop").HeaderText("Apellido Paterno").Width(50).Add();
+        //col.Field("apellidom").HeaderText("Apellido Materno").Width(50).Add();
+        col.Field("telefonos").HeaderText("Telefono(s)").Width(30).Add();
+        col.HeaderText("Opciones").Commands(command =>
+        {
+            command.Type("edit").
+            ButtonOptions(new Syncfusion.JavaScript.Models.ButtonProperties()
+            {
+                Text = "Informacion",
+                Click = "onClick",
+                Width = "100"
+            }).Add();
+
+            command.Type("delete").
+            ButtonOptions(new Syncfusion.JavaScript.Models.ButtonProperties()
+            {
+                Text = "Eliminar",
+                Click = "onClick",
+                Width = "100"
+            }).Add();
+        }).TextAlign(TextAlign.Center).Width(50).Add();
+    })
+)
+
+<br />
+
+<script type="text/javascript">
+    function onClick(args) {
+        //VER SI HAGO OTRO ARCHIVO CON ESTE SCRIPT O LO DEJO AQUI
+        //Obtencion del id
+        var gridObj = $("#FlatGrid").ejGrid("instance");
+        var index = this.element.closest("tr").index();
+        var record = gridObj.getCurrentViewData()[index].pacienteid;
+
+        //Obtiene el tipo de boton usado
+        var tipo = args.model.text;
+
+        //Variables para las direcciones y su construccion
+        var direccion = "";
+        var direccionCorrecta = "";
+
+        //Se asigna el diferente tipo de url segun el tipo
+        switch (tipo) {
+            case "Informacion":
+                direccion = '@Url.Action("Informacion", "pacientes", new { id = "_id_" })';
+                break;
+            case "Eliminar":
+                direccion = '@Url.Action("Delete", "pacientes", new { id = "_id_" })';
+                break;
+            default:
+        }
+
+        //Si record no es undefined o 0, entonces se avanza a la redireccion
+        if (!record || record != 0) {
+            //Se reemplaza _id_ con el verdadero id
+            direccionCorrecta = direccion.replace('_id_', record);
+
+            //Se redirecciona a la nueva view
+            window.location.href = direccionCorrecta;
+        }
+    }
+</script>

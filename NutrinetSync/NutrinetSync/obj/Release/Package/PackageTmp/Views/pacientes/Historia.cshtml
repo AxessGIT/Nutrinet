@@ -99,7 +99,7 @@
                     <div class="col-md-8">
                         @*@Html.EditorFor(model => model.paciente.talla, new { htmlAttributes = new { @class = "form-control", id = "txtTalla" } })
                         @Html.ValidationMessageFor(model => model.paciente.talla, "", new { @class = "text-danger" })*@
-                        @Html.EJ().NumericTextBoxFor(model => model.paciente.talla, new { htmlAttributes = new { @class = "form-control", id = "txtTallaSync" } }).DecimalPlaces(2).ClientSideEvents(e => e.Change("onChange"))
+                        @Html.EJ().NumericTextBoxFor(model => model.paciente.talla, new { htmlAttributes = new { @class = "form-control" } }).ClientSideEvents(e => e.Change("onChange"))
                         <input class="form-control" id="txtTalla" value="@Model.paciente.talla" type="hidden" />
                     </div>
                 </div>

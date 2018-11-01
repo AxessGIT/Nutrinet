@@ -22,5 +22,5 @@
     var txt = "txt" + output;
 
     //Agrega el dato a su correspondiente txt
-    $(("#" + txt)).val(Text);
+    $("#" + txt).val(Text);
 }

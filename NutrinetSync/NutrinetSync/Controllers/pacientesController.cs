@@ -26,27 +26,23 @@ namespace NutrinetSync.Controllers
 
     public class pacientesController : Controller
     {
-        private nutrinetEntities db = new nutrinetEntities(); 
+        private nutrinetEntities db = new nutrinetEntities(true);
 
         // GET: pacientes
         public ActionResult Index()
         {
-            return View(db.paciente.ToList());
-        }
+            //return View(db.paciente.ToList());
 
-        // GET: pacientes/Details/5
-        public ActionResult Details(long? id)
-        {
-            if (id == null)
+            var consultaModificada = db.paciente.Select(p => new
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            paciente paciente = db.paciente.Find(id);
-            if (paciente == null)
-            {
-                return HttpNotFound();
-            }
-            return View(paciente);
+                p.pacienteid,
+                nombre = p.nombres + " " + p.apellidop + " " + p.apellidom,
+                p.telefonos
+            }).ToList();
+
+            ViewBag.data = consultaModificada;
+
+            return View();
         }
 
         //GET: pacientes/Historia

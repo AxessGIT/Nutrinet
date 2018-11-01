@@ -172,8 +172,6 @@ C:\Prgs\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.csproj.CoreCompileInput
 C:\Prgs\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.csproj.CopyComplete
 C:\Prgs\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.dll
 C:\Prgs\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.pdb
-C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\EntityFramework.dll
-C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\EntityFramework.xml
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\NutrinetSync.dll.config
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\NutrinetSync.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\NutrinetSync.pdb
@@ -273,6 +271,7 @@ C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\System.Xml.XmlSerializer.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\System.Xml.XPath.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\System.Xml.XPath.XDocument.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Antlr3.Runtime.dll
+C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\EntityFramework.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\EntityFramework.SqlServer.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\EntityFramework6.Npgsql.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Microsoft.AspNet.Identity.Core.dll
@@ -329,6 +328,7 @@ C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.OfficeChart.Base.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.ExcelToPDFConverter.Base.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.RichTextBoxAdv.WPF.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Antlr3.Runtime.pdb
+C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\EntityFramework.xml
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\EntityFramework.SqlServer.xml
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\EntityFramework6.Npgsql.xml
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Microsoft.AspNet.Identity.Core.xml
@@ -382,8 +382,8 @@ C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\System.Web.WebPages.Razor.xml
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.OfficeChart.Base.xml
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.ExcelToPDFConverter.Base.xml
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.RichTextBoxAdv.WPF.xml
+C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.csprojAssemblyReference.cache
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.csproj.CoreCompileInputs.cache
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.csproj.CopyComplete
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.pdb
-C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.csprojAssemblyReference.cache
