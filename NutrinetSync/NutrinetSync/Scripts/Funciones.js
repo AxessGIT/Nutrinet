@@ -48,9 +48,13 @@ function AgregaDatos() {
     //Obtiene el texto actual
     var Texto = $("#txtHistoria").val();
 
+    //Obtencion del IMC y redondeo a dos decimales (old)
+    //var IMC = Peso / Math.pow(Talla, 2);    
+    //IMC = (Math.round(IMC * 100.0)) / 100.0;
+
     //Obtencion del IMC y redondeo a dos decimales
-    var IMC = Peso / Math.pow(Talla, 2);
-    IMC = (Math.round(IMC * 100.0)) / 100.0;
+    var IMCk = (Peso / Math.pow(Talla, 2)) * 10000;
+    IMCk = (Math.round(IMCk * 100.0) / 100.0);
 
     //Calcula el Gasto Energetico Basal y redondeo a sin ningun decimal
     if (Sexo === "M") {
@@ -64,7 +68,7 @@ function AgregaDatos() {
     //Agrega la nueva fecha
     Texto = "Fecha de Consulta: " + Fecha + " \n" + " \n" +
         "Peso: " + Peso + "   " + "Talla: " + Talla + " \n" +
-        "Índice de Masa Corporal: " + IMC + " \n" +
+        "Índice de Masa Corporal: " + IMCk + " \n" +
         "Gasto Energético Basal: " + GEB + " \n" + " \n" +
         Texto;
 

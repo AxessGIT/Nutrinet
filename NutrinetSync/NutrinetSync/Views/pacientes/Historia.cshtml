@@ -4,6 +4,18 @@
     ViewBag.Title = "Historia del Paciente";
 }
 
+<style type="text/css">
+    .centrar {
+        width: 800px;
+        margin:auto;
+    }
+
+    .width-textarea {
+        max-width: 700px;
+        width: 100%;
+    }
+</style>
+
 <h2>Historia del Paciente</h2>
 
 @using (Html.BeginForm())
@@ -16,89 +28,77 @@
         @Html.HiddenFor(model => model.historiaid)
         @Html.HiddenFor(model => model.paciente.pacienteid)
 
-        <div class="row">
-            <div class="col-md-10">
+        <div class="row centrar">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <div class="col-md-2">
-                        Nombre del Paciente
+                    <div class="col-sm-4">
+                        <b>Nombre del Paciente</b>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-sm-7">
                         @*@ViewBag.NombreCompleto*@
                         <input id="txtNombreCompleto" class="form-control" value="@ViewBag.NombreCompleto" />
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <div class="col-md-2">
-                        Edad
+                    <div class="col-sm-4">
+                        <b>Fecha de Consulta</b>
                     </div>
-                    <div class="col-md-8">
-                        @*@ViewBag.Edad*@
-                        <input id="txtEdad" class="form-control" value="@ViewBag.Edad" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-10">
-                <div class="form-group">
-                    <div class="col-md-2">
-                        Sexo
-                    </div>
-                    <div class="col-md-8">
-                        @*@ViewBag.Sexo*@
-                        <input id="txtSexo" class="form-control" value="@ViewBag.Sexo" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        @* Fecha (Hoy) *@
-        <div class="row">
-            <div class="col-md-10">
-                <div class="form-group">
-                    <div class="col-md-2">
-                        Fecha de Consulta
-                    </div>
-                    <div class="col-md-8">
-                        @Html.EJ().DatePickerFor(model => model.paciente.ultimaconsulta, new { htmlAttributes = new { @class = "form-control" } }).Value(Model.paciente.ultimaconsulta).DateFormat("yyyy/MM/dd").Locale("es-MX").WatermarkText("Ingrese la Fecha").ButtonText("Hoy").ClientSideEvents(e => e.Change("onChange"))
+                    <div class="col-sm-7">
+                        @Html.EJ().DatePickerFor(model => model.paciente.ultimaconsulta, new { htmlAttributes = new { @class = "form-control" } }).Value(Model.paciente.ultimaconsulta).DateFormat("yyyy/MM/dd").Locale("es-MX").WatermarkText("Ingrese la Fecha").ButtonText("Hoy").ClientSideEvents(e => e.Change("onChange")).AllowEdit(false)
                         <input class="form-control" id="txtFecha" value="@(ViewBag.FechaActual ?? String.Empty)" type="hidden" />
                     </div>
                 </div>
             </div>
         </div>
 
-        @* Peso (Kilogramos) *@
-        <div class="row">
-            <div class="col-md-10">
+        <div class="row centrar">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <div class="col-md-2">
-                        Peso (Kilogramos)
+                    <div class="col-sm-4">
+                        <b>Edad</b>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-sm-7">
+                        @*@ViewBag.Edad*@
+                        <input id="txtEdad" class="form-control" value="@ViewBag.Edad" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <b>Peso (Kilogramos)</b>
+                    </div>
+                    <div class="col-sm-7">
                         @Html.EJ().NumericTextBoxFor(model => model.paciente.peso, new { htmlAttributes = new { @class = "form-control" } }).DecimalPlaces(2).ClientSideEvents(e => e.Change("onChange"))
-                        @*@Html.EditorFor(model => model.paciente.peso, new { htmlAttributes = new { @class = "form-control", id = "txtTalla", @type = "number" } })*@
                         <input class="form-control" id="txtPeso" value="@Model.paciente.peso" type="hidden" />
                     </div>
                 </div>
             </div>
         </div>
 
-        @* Talla (Centimetros) *@
-        <div class="row">
-            <div class="col-md-10">
+        <div class="row centrar">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <div class="col-md-2">
-                        Talla (Centimetros)
+                    <div class="col-sm-4">
+                        <b>Sexo</b>
                     </div>
-                    <div class="col-md-8">
-                        @*@Html.EditorFor(model => model.paciente.talla, new { htmlAttributes = new { @class = "form-control", id = "txtTalla" } })
-                        @Html.ValidationMessageFor(model => model.paciente.talla, "", new { @class = "text-danger" })*@
+                    <div class="col-sm-7">
+                        @*@ViewBag.Sexo*@
+                        <input id="txtSexo" class="form-control" value="@ViewBag.Sexo" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <b>Talla (Centimetros)</b>
+                    </div>
+                    <div class="col-sm-7">
                         @Html.EJ().NumericTextBoxFor(model => model.paciente.talla, new { htmlAttributes = new { @class = "form-control" } }).ClientSideEvents(e => e.Change("onChange"))
                         <input class="form-control" id="txtTalla" value="@Model.paciente.talla" type="hidden" />
                     </div>
@@ -106,31 +106,35 @@
             </div>
         </div>
         
-        <div class="row">
-            <div class="col-md-10">
+        <div class="row centrar">
+            <div class="col-md-6">
                 <div class="form-group">
                     <div class="col-md-2">
                         <button id="btnAgregar" onclick="AgregaDatos()" class="btn btn-primary" type="button">Agregar</button>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-10">
-            <div class="form-group">
-                <p>Notas</p>
-                @*@Html.EditorFor(model => model.historia, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.TextAreaFor(model => model.historia, new { @class = "form-control", @cols = 100, @rows = 10, id = "txtHistoria" })
-                @Html.ValidationMessageFor(model => model.historia, "", new { @class = "text-danger" })
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <input type="submit" value="Guardar" class="btn btn-success" />
+                    </div>
+                </div>
             </div>
         </div>
 
+        <hr />
 
-        <div class="row">
-            <div class="col-md-4">
-                <input type="submit" value="Guardar" class="btn btn-success" />
+        <div class="row centrar">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <h4>Notas</h4>
+                    @Html.TextAreaFor(model => model.historia, 10, 25, new { @class = "form-control width-textarea", id = "txtHistoria" })
+                    @Html.ValidationMessageFor(model => model.historia, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
+        </div>   
     </div>
 }
 

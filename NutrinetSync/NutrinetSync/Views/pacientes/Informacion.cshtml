@@ -20,20 +20,6 @@
         @Html.HiddenFor(model => model.pacienteid)
     }
 
-    @* TODO: CAMBIAR ESTO A ACORDEON: https://getbootstrap.com/docs/4.0/components/collapse/ Y CAMBIAR LA CULTURA *@
-    @*<div class="row">
-        <div class="col-lg-12">
-            <div class="btn-group">
-                <a class="btn btn-default" data-toggle="collapse" href="#infoGenerales" role="button" aria-expanded="false" aria-controls="infoGenerales">Generales</a>
-                <a class="btn btn-default" data-toggle="collapse" href="#infoDireccion" role="button" aria-expanded="false" aria-controls="infoDireccion">Direccion</a>
-                <a class="btn btn-default" data-toggle="collapse" href="#infoAdicional" role="button" aria-expanded="false" aria-controls="infoAdicional">Adicional</a>
-            </div>
-        </div>
-    </div>
-
-    <br />
-    <br />*@
-
     <div class="panel-group" id="accordion">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -86,7 +72,7 @@
                                 Fecha Nacimiento
                             </div>
                             <div class="col-sm-6">
-                                @Html.EJ().DatePickerFor(model => model.fechanac, new { htmlAttributes = new { @class = "form-control" } }).DateFormat("yyyy/MM/dd").Locale("es-MX").WatermarkText("Ingrese la Fecha").ButtonText("Hoy")
+                                @Html.EJ().DatePickerFor(model => model.fechanac, new { htmlAttributes = new { @class = "form-control" } }).DateFormat("yyyy/MM/dd").Locale("es-MX").WatermarkText("Ingrese la Fecha").ButtonText("Hoy").AllowEdit(false)
                                 @Html.ValidationMessageFor(model => model.fechanac, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -362,7 +348,7 @@
                                 Ultima Consulta
                             </div>
                             <div class="col-sm-6">
-                                @Html.EJ().DatePickerFor(model => model.ultimaconsulta, new { htmlAttributes = new { @class = "form-control" } }).DateFormat("yyyy/MM/dd").Locale("es-MX").WatermarkText("Ingrese la Fecha").ButtonText("Hoy")
+                                @Html.EJ().DatePickerFor(model => model.ultimaconsulta, new { htmlAttributes = new { @class = "form-control" } }).DateFormat("yyyy/MM/dd").Locale("es-MX").WatermarkText("Ingrese la Fecha").ButtonText("Hoy").AllowEdit(false)
                                 @Html.ValidationMessageFor(model => model.ultimaconsulta, "", new { @class = "text-danger" })
                             </div>
                         </div>

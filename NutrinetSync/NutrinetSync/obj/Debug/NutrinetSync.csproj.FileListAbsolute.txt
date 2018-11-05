@@ -172,6 +172,8 @@ C:\Prgs\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.csproj.CoreCompileInput
 C:\Prgs\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.csproj.CopyComplete
 C:\Prgs\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.dll
 C:\Prgs\NutrinetSync\NutrinetSync\obj\Debug\NutrinetSync.pdb
+C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.Pdf.Base.dll
+C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.Pdf.Base.xml
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\NutrinetSync.dll.config
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\NutrinetSync.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\NutrinetSync.pdb
@@ -302,7 +304,6 @@ C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.EJ.ReportViewer.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.Gauge.Wpf.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.Linq.Base.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.Olap.Base.dll
-C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.Pdf.Base.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.PivotAnalysis.Base.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.PMML.Base.dll
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.Presentation.Base.dll
@@ -358,7 +359,6 @@ C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.EJ.ReportViewer.xml
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.Gauge.Wpf.xml
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.Linq.Base.xml
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.Olap.Base.xml
-C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.Pdf.Base.xml
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.PivotAnalysis.Base.xml
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.PMML.Base.xml
 C:\Prgs\Nutrinet\NutrinetSync\NutrinetSync\bin\Syncfusion.Presentation.Base.xml
